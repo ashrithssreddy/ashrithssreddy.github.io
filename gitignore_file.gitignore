@@ -1,0 +1,13 @@
+
+# Ignore PDF files
+*.pdf
+
+# Ignore LaTeX files
+*.tex
+*.aux
+*.log
+*.out
+*.toc
+
+# Ignore text files
+*.txt
