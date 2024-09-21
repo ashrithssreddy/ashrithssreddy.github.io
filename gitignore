@@ -1,12 +1,3 @@
-# Ignore PDF files
-*.pdf
+support_files/
 
-# Ignore LaTeX files
-*.tex
-*.aux
-*.log
-*.out
-*.toc
-
-# Ignore text files
-*.txt
+.DS_Store
