@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashrith Reddy - Professional Webpage</title>
+    <!-- Link to Google Fonts and Font Awesome for icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
             color: #333;
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #fff;
             padding: 20px;
-            color: white;
+            color: #333;
             display: flex;
             align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .profile-img {
-            max-width: 100px;
+            max-width: 80px;
             border-radius: 50%;
             margin-right: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .header-text {
             flex-grow: 1;
@@ -31,13 +37,16 @@
             display: flex;
             justify-content: center;
             background-color: #333;
+            padding: 10px 0;
         }
         .tab {
-            padding: 15px;
+            padding: 10px 20px;
             cursor: pointer;
             color: white;
             text-align: center;
-            flex: 1;
+            border-radius: 5px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
         }
         .tab:hover, .active {
             background-color: #4CAF50;
@@ -46,8 +55,9 @@
             display: none;
             padding: 20px;
             margin: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
         .active-content {
             display: block;
@@ -63,28 +73,66 @@
             outline: none;
             font-size: 18px;
             margin-top: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .collapsible:hover {
+            background-color: #45a049;
         }
         .collapsible:after {
-            content: '+';
-            font-size: 18px;
+            content: '\f078';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
             float: right;
+            transition: transform 0.3s;
         }
         .active-collapsible:after {
-            content: '-';
+            transform: rotate(180deg);
         }
         .collapsible-content {
-            padding: 0 15px;
+            padding: 15px;
             display: none;
             overflow: hidden;
-            background-color: #f9f9f9;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        #contact {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #contact ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #contact li {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        #contact li i {
+            margin-right: 10px;
+            color: #4CAF50;
+        }
+        #contact .location {
+            color: #666;
+            font-style: italic;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <!-- Placeholder image at the top left -->
-    <img src="https://via.placeholder.com/100" alt="Ashrith Reddy" class="profile-img">
+    <img src="https://via.placeholder.com/80" alt="Ashrith Reddy" class="profile-img">
     <div class="header-text">
         <h1>Ashrith Reddy</h1>
         <p>Data Scientist | Technology Enthusiast | Creative Problem Solver</p>
@@ -182,16 +230,30 @@
 </div>
 
 <div id="education" class="tab-content">
-    <h2>Education / Lifelong Learning</h2>
-    <button class="collapsible">Master's in Data Science</button>
+    <h2>Education</h2>
+    
+    <button class="collapsible">
+        <i class="fas fa-graduation-cap"></i> M.S. in Statistics, Florida State University (Aug 2020 – Jul 2022)
+    </button>
     <div class="collapsible-content">
-        <p>Details about your master's program, courses taken, and key learnings...</p>
+        <div class="education-card">
+            <p><strong>Grade:</strong> 3.7/4</p>
+            <p><strong>Coursework:</strong> Computational Methods in Statistics I & II, Statistics in Applications I, II & III, Distribution Theory & Inference, Time Series & Forecasting Methods, Logistic Regression, Applied Machine Learning, Linear Statistical Models, Engineering Data Analysis, Internship in Statistics.</p>
+            <p><strong>Activities:</strong> Graduate Assistant – Developed a plug-and-play academic program website for the department.</p>
+        </div>
     </div>
-    <button class="collapsible">Online Courses & Certifications</button>
+    
+    <button class="collapsible">
+        <i class="fas fa-university"></i> B.S. in Electrical and Electronics Engineering, NIT Karnataka (Jul 2011 – May 2015)
+    </button>
     <div class="collapsible-content">
-        <p>Details about any self-paced learning, online courses, and platforms (e.g., Coursera, Udemy)...</p>
+        <div class="education-card">
+            <p><strong>Coursework:</strong> Computer Programming and Lab (C++), Calculus I, Calculus II, Linear Algebra and Matrices, Probability Theory and Applications, Engineering Optimization, Intermediate MATLAB Programming.</p>
+            <p><strong>Activities:</strong> Placement Coordinator – Achieved a 15% increase in placement offers, comprehensively coordinated the placement procedure for the class of 105 students.</p>
+        </div>
     </div>
 </div>
+
 
 <div id="personal" class="tab-content">
     <h2>Personal Side</h2>
@@ -207,14 +269,16 @@
 
 <div id="contact" class="tab-content">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:ashrithssreddy@gmail.com">ashrithssreddy@gmail.com</a></p>
-    <p>Phone: <a href="tel:8503395898">+1 (850) 339-5898</a></p>
-    <p>Location: Austin, Texas</p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">LinkedIn Profile</a></p>
-    <p>GitHub: <a href="https://github.com/ashrithssreddy" target="_blank">GitHub Profile</a></p>
-    <p>Website: <a href="https://ashrithssreddy.github.io/" target="_blank">Website</a></p>
-    <p>Resume: <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">Download</a></p>
-    <p>Schedule a Meeting: <a href="https://calendly.com/ashrithssreddy" target="_blank">Book here</a></p>
+    <ul>
+        <li><i class="fas fa-envelope"></i> <a href="mailto:ashrithssreddy@gmail.com">ashrithssreddy@gmail.com</a></li>
+        <li><i class="fas fa-phone"></i> <a href="tel:8503395898">+1 (850) 339-5898</a></li>
+        <li class="location"><i class="fas fa-map-marker-alt"></i> Austin, Texas, working remotely</li>
+        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">LinkedIn Profile</a></li>
+        <li><i class="fab fa-github"></i> <a href="https://github.com/ashrithssreddy" target="_blank">GitHub Profile</a></li>
+        <li><i class="fas fa-globe"></i> <a href="https://ashrithssreddy.github.io/" target="_blank">Website</a></li>
+        <li><i class="fas fa-file-alt"></i> <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">Download Resume</a></li>
+        <li><i class="fas fa-calendar-alt"></i> <a href="https://calendly.com/ashrithssreddy" target="_blank">Schedule a Meeting</a></li>
+    </ul>
 </div>
 
 <script>
