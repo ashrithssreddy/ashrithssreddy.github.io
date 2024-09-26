@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashrith Reddy - Professional Webpage</title>
     <!-- Link to Google Fonts and Font Awesome for icons -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* Global Styles */
         body {
             font-family: 'Open Sans', sans-serif;
             background-color: #f9f9f9;
@@ -16,6 +17,8 @@
             padding: 0;
             line-height: 1.6;
         }
+
+        /* Header Styling */
         header {
             background-color: #fff;
             padding: 20px;
@@ -23,9 +26,10 @@
             display: flex;
             align-items: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Full-width header */
         }
         .profile-img {
-            max-width: 80px;
+            max-width: 100px;
             border-radius: 50%;
             margin-right: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -33,11 +37,32 @@
         .header-text {
             flex-grow: 1;
         }
+        .header-text h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        /* Container to center content and set max-width */
+        .container {
+            max-width: 900px; /* Adjust as needed */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation Tab Container Styling */
         .tab-container {
             display: flex;
             justify-content: center;
             background-color: #333;
             padding: 10px 0;
+            border-radius: 8px;
+            margin: 20px auto 0; /* Centered within container */
+            flex-wrap: wrap;
         }
         .tab {
             padding: 10px 20px;
@@ -45,23 +70,29 @@
             color: white;
             text-align: center;
             border-radius: 5px;
-            margin: 0 5px;
+            margin: 5px;
             transition: background-color 0.3s;
+            white-space: nowrap;
         }
         .tab:hover, .active {
             background-color: #4CAF50;
         }
+
+        /* Tab Content Styling */
         .tab-content {
             display: none;
             padding: 20px;
-            margin: 20px;
+            margin: 20px auto;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            max-width: 900px; /* Match container width */
         }
         .active-content {
             display: block;
         }
+
+        /* Collapsible Sections Styling */
         .collapsible {
             background-color: #4CAF50;
             color: white;
@@ -88,7 +119,7 @@
             content: '\f078';
             font-family: 'Font Awesome 5 Free';
             font-weight: 900;
-            float: right;
+            margin-left: auto;
             transition: transform 0.3s;
         }
         .active-collapsible:after {
@@ -96,13 +127,14 @@
         }
         .collapsible-content {
             padding: 20px;
-            display: none;
+            display: block; /* Keeps them open by default */
             overflow: hidden;
             background-color: #f9f9f9;
             border-radius: 8px;
             margin-top: 10px;
         }
-        /* Education card styling */
+
+        /* Education Card Styling */
         .education-card {
             background-color: #ffffff;
             padding: 15px;
@@ -112,9 +144,32 @@
             border: 1px solid #ddd;
             margin-top: 10px;
         }
-        #contact {
-            max-width: 600px;
-            margin: 0 auto;
+
+        /* Contact Section Styling */
+        .contact-container {
+            display: flex;
+            align-items: flex-start;
+            padding: 20px;
+            margin: 20px auto;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
+            max-width: 900px;
+        }
+        .contact-image {
+            flex: 0 0 auto;
+            margin-right: 20px;
+        }
+        .contact-image img {
+            max-width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .contact-box {
+            flex: 1 1 auto;
+            min-width: 250px;
         }
         #contact ul {
             list-style-type: none;
@@ -133,7 +188,18 @@
         #contact .location {
             color: #666;
             font-style: italic;
+            display: flex;
+            align-items: center;
         }
+        #contact .location .badge {
+            background-color: #e0f7fa;
+            color: #00796b;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        /* Links Styling */
         a {
             color: #4CAF50;
             text-decoration: none;
@@ -142,190 +208,294 @@
         a:hover {
             text-decoration: underline;
         }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .contact-image, .contact-box {
+                margin-left: 0;
+                width: 100%;
+            }
+            .tab-container {
+                flex-direction: column;
+            }
+            .tab {
+                width: 100%;
+                text-align: left;
+            }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <img src="https://via.placeholder.com/80" alt="Ashrith Reddy" class="profile-img">
-    <div class="header-text">
-        <h1>Ashrith Reddy</h1>
-        <p>Data Scientist | Technology Enthusiast | Creative Problem Solver</p>
-    </div>
-</header>
-
-<div class="tab-container">
-    <div class="tab active" onclick="openTab(event, 'about')">About Me</div>
-    <div class="tab" onclick="openTab(event, 'projects')">Projects</div>
-    <div class="tab" onclick="openTab(event, 'experience')">Experience</div>
-    <div class="tab" onclick="openTab(event, 'skills')">Skills</div>
-    <div class="tab" onclick="openTab(event, 'publications')">Publications</div>
-    <div class="tab" onclick="openTab(event, 'certifications')">Certifications</div>
-    <div class="tab" onclick="openTab(event, 'portfolio')">Portfolio</div>
-    <div class="tab" onclick="openTab(event, 'education')">Education</div>
-    <div class="tab" onclick="openTab(event, 'personal')">Personal Side</div>
-    <div class="tab" onclick="openTab(event, 'contact')">Contact</div>
-</div>
-
-<div id="about" class="tab-content active-content">
-    <h2>About Me</h2>
-    <p>I'm a data scientist with a passion for solving complex problems using data-driven approaches. My experience spans across machine learning, statistics, and real-time analytics to deliver impactful solutions.</p>
-</div>
-
-<div id="projects" class="tab-content">
-    <h2>Projects</h2>
-    <button class="collapsible">Project 1: Data Analysis on E-commerce Trends</button>
-    <div class="collapsible-content">
-        <p>A detailed exploration of e-commerce sales data...</p>
-    </div>
-    <button class="collapsible">Project 2: Predictive Modeling for Customer Churn</button>
-    <div class="collapsible-content">
-        <p>Using machine learning to predict customer churn rates...</p>
-    </div>
-    <button class="collapsible">Project 3: Real-time Analytics Dashboard</button>
-    <div class="collapsible-content">
-        <p>Built an interactive dashboard for visualizing real-time data...</p>
-    </div>
-</div>
-
-<div id="experience" class="tab-content">
-    <h2>Experience</h2>
-    <button class="collapsible">Data Scientist at XYZ Corp (2021-Present)</button>
-    <div class="collapsible-content">
-        <p>Developed predictive models to enhance marketing strategies...</p>
-    </div>
-    <button class="collapsible">Data Analyst at ABC Inc (2018-2021)</button>
-    <div class="collapsible-content">
-        <p>Conducted exploratory data analysis for business insights...</p>
-    </div>
-</div>
-
-<div id="skills" class="tab-content">
-    <h2>Skills</h2>
-    <ul>
-        <li>Programming Languages: Python, R, SQL</li>
-        <li>Machine Learning: Scikit-Learn, TensorFlow, PyTorch</li>
-        <li>Data Visualization: Tableau, Matplotlib, Seaborn</li>
-        <li>Data Processing: Pandas, NumPy, Spark</li>
-        <li>Soft Skills: Problem-solving, Communication, Teamwork</li>
-    </ul>
-</div>
-
-<div id="publications" class="tab-content">
-    <h2>Publications</h2>
-    <button class="collapsible">Data Science in Retail: Analyzing Trends</button>
-    <div class="collapsible-content">
-        <p>Details about this publication...</p>
-    </div>
-    <button class="collapsible">Machine Learning Algorithms Explained</button>
-    <div class="collapsible-content">
-        <p>Details about this publication...</p>
-    </div>
-</div>
-
-<div id="certifications" class="tab-content">
-    <h2>Certifications</h2>
-    <ul>
-        <li>Certified Data Scientist - DataCamp</li>
-        <li>Machine Learning Specialization - Coursera</li>
-        <li>Advanced SQL for Data Scientists - DataQuest</li>
-    </ul>
-</div>
-
-<div id="portfolio" class="tab-content">
-    <h2>Portfolio</h2>
-    <button class="collapsible">E-commerce Data Analysis Dashboard</button>
-    <div class="collapsible-content">
-        <p>Explore my work on the e-commerce data analysis dashboard...</p>
-    </div>
-    <button class="collapsible">Machine Learning Model Repository</button>
-    <div class="collapsible-content">
-        <p>Details about my machine learning models...</p>
-    </div>
-</div>
-
-<div id="education" class="tab-content">
-    <h2>Education</h2>
-    
-    <button class="collapsible">
-        <i class="fas fa-graduation-cap"></i> M.S. in Statistics, Florida State University (Aug 2020 – Jul 2022)
-    </button>
-    <div class="collapsible-content">
-        <div class="education-card">
-            <p><strong>Grade:</strong> 3.7/4</p>
-            <p><strong>Coursework:</strong> Computational Methods in Statistics I & II, Statistics in Applications I, II & III, Distribution Theory & Inference, Time Series & Forecasting Methods, Logistic Regression, Applied Machine Learning, Linear Statistical Models, Engineering Data Analysis, Internship in Statistics.</p>
-            <p><strong>Activities:</strong> Graduate Assistant – Developed a plug-and-play academic program website for the department.</p>
+    <!-- Full-Width Header -->
+    <header>
+        <img src="https://via.placeholder.com/100" alt="Ashrith Reddy" class="profile-img">
+        <div class="header-text">
+            <h1>Ashrith Reddy</h1>
+            <p>Data Scientist | Technology Enthusiast | Creative Problem Solver</p>
         </div>
-    </div>
-    
-    <button class="collapsible">
-        <i class="fas fa-university"></i> B.S. in Electrical and Electronics Engineering, NIT Karnataka (Jul 2011 – May 2015)
-    </button>
-    <div class="collapsible-content">
-        <div class="education-card">
-            <p><strong>Coursework:</strong> Computer Programming and Lab (C++), Calculus I, Calculus II, Linear Algebra and Matrices, Probability Theory and Applications, Engineering Optimization, Intermediate MATLAB Programming.</p>
-            <p><strong>Activities:</strong> Placement Coordinator – Achieved a 15% increase in placement offers, comprehensively coordinated the placement procedure for the class of 105 students.</p>
+    </header>
+
+    <!-- Container for Navigation and Content -->
+    <div class="container">
+
+        <!-- Navigation Tabs -->
+        <div class="tab-container">
+            <div class="tab active" onclick="openTab(event, 'about')">About Me</div>
+            <div class="tab" onclick="openTab(event, 'projects')">Projects</div>
+            <div class="tab" onclick="openTab(event, 'experience')">Experience</div>
+            <div class="tab" onclick="openTab(event, 'skills')">Skills</div>
+            <div class="tab" onclick="openTab(event, 'publications')">Publications</div>
+            <div class="tab" onclick="openTab(event, 'certifications')">Certifications</div>
+            <div class="tab" onclick="openTab(event, 'portfolio')">Portfolio</div>
+            <div class="tab" onclick="openTab(event, 'education')">Education</div>
+            <div class="tab" onclick="openTab(event, 'personal')">Personal Side</div>
+            <div class="tab" onclick="openTab(event, 'contact')">Contact</div>
         </div>
-    </div>
-</div>
 
-<div id="personal" class="tab-content">
-    <h2>Personal Side</h2>
-    <button class="collapsible">Hobbies & Interests</button>
-    <div class="collapsible-content">
-        <p>Details about your hobbies and how you unwind (e.g., hiking, reading, cooking, etc.)...</p>
-    </div>
-    <button class="collapsible">Volunteer Work & Extracurriculars</button>
-    <div class="collapsible-content">
-        <p>Details about any community service, volunteering, or clubs you're part of...</p>
-    </div>
-</div>
+        <!-- About Me Section -->
+        <div id="about" class="tab-content active-content">
+            <h2>About Me</h2>
+            <p>I'm a data scientist with a passion for solving complex problems using data-driven approaches. My experience spans across machine learning, statistics, and real-time analytics to deliver impactful solutions.</p>
+        </div>
 
-<div id="contact" class="tab-content">
-    <h2>Contact</h2>
-    <ul>
-        <li><i class="fas fa-envelope"></i> <a href="mailto:ashrithssreddy@gmail.com">ashrithssreddy@gmail.com</a></li>
-        <li><i class="fas fa-phone"></i> <a href="tel:8503395898">+1 (850) 339-5898</a></li>
-        <li class="location"><i class="fas fa-map-marker-alt"></i> Austin, Texas, working remotely</li>
-        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">LinkedIn Profile</a></li>
-        <li><i class="fab fa-github"></i> <a href="https://github.com/ashrithssreddy" target="_blank">GitHub Profile</a></li>
-        <li><i class="fas fa-globe"></i> <a href="https://ashrithssreddy.github.io/" target="_blank">Website</a></li>
-        <li><i class="fas fa-file-alt"></i> <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">Download Resume</a></li>
-        <li><i class="fas fa-calendar-alt"></i> <a href="https://calendly.com/ashrithssreddy" target="_blank">Schedule a Meeting</a></li>
-    </ul>
-</div>
+        <!-- Projects Section -->
+        <div id="projects" class="tab-content">
+            <h2>Projects</h2>
+            <button class="collapsible active-collapsible">
+                Project 1: Data Analysis on E-commerce Trends
+            </button>
+            <div class="collapsible-content">
+                <p>A detailed exploration of e-commerce sales data to identify trends and patterns, helping businesses optimize their strategies.</p>
+            </div>
+            <button class="collapsible active-collapsible">
+                Project 2: Predictive Modeling for Customer Churn
+            </button>
+            <div class="collapsible-content">
+                <p>Using machine learning algorithms to predict customer churn rates, enabling proactive retention strategies.</p>
+            </div>
+            <button class="collapsible active-collapsible">
+                Project 3: Real-time Analytics Dashboard
+            </button>
+            <div class="collapsible-content">
+                <p>Built an interactive dashboard for visualizing real-time data, providing actionable insights to stakeholders.</p>
+            </div>
+        </div>
 
-<script>
-    function openTab(evt, tabName) {
-        let i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tab");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
+        <!-- Experience Section -->
+        <div id="experience" class="tab-content">
+            <h2>Experience</h2>
+            <button class="collapsible active-collapsible">
+                Data Scientist at XYZ Corp (2021-Present)
+            </button>
+            <div class="collapsible-content">
+                <p>Developed predictive models to enhance marketing strategies, resulting in a 15% increase in campaign effectiveness.</p>
+            </div>
+            <button class="collapsible active-collapsible">
+                Data Analyst at ABC Inc (2018-2021)
+            </button>
+            <div class="collapsible-content">
+                <p>Conducted exploratory data analysis to derive business insights, contributing to a 10% revenue growth.</p>
+            </div>
+        </div>
 
-    let coll = document.getElementsByClassName("collapsible");
-    for (let i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active-collapsible");
-            let content = this.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
+        <!-- Skills Section -->
+        <div id="skills" class="tab-content">
+            <h2>Skills</h2>
+            <ul>
+                <li>Programming Languages: Python, R, SQL</li>
+                <li>Machine Learning: Scikit-Learn, TensorFlow, PyTorch</li>
+                <li>Data Visualization: Tableau, Matplotlib, Seaborn</li>
+                <li>Data Processing: Pandas, NumPy, Spark</li>
+                <li>Soft Skills: Problem-solving, Communication, Teamwork</li>
+            </ul>
+        </div>
+
+        <!-- Publications Section -->
+        <div id="publications" class="tab-content">
+            <h2>Publications</h2>
+            <button class="collapsible active-collapsible">
+                Data Science in Retail: Analyzing Trends
+            </button>
+            <div class="collapsible-content">
+                <p>Published a comprehensive study on the impact of data science in retail, focusing on trend analysis and predictive modeling.</p>
+            </div>
+            <button class="collapsible active-collapsible">
+                Machine Learning Algorithms Explained
+            </button>
+            <div class="collapsible-content">
+                <p>Authored an article demystifying various machine learning algorithms, making them accessible to a broader audience.</p>
+            </div>
+        </div>
+
+        <!-- Certifications Section -->
+        <div id="certifications" class="tab-content">
+            <h2>Certifications</h2>
+            <ul>
+                <li>Certified Data Scientist - DataCamp</li>
+                <li>Machine Learning Specialization - Coursera</li>
+                <li>Advanced SQL for Data Scientists - DataQuest</li>
+            </ul>
+        </div>
+
+        <!-- Portfolio Section -->
+        <div id="portfolio" class="tab-content">
+            <h2>Portfolio</h2>
+            <button class="collapsible active-collapsible">
+                E-commerce Data Analysis Dashboard
+            </button>
+            <div class="collapsible-content">
+                <p>Explore my work on the e-commerce data analysis dashboard, which provides real-time insights into sales and customer behavior.</p>
+            </div>
+            <button class="collapsible active-collapsible">
+                Machine Learning Model Repository
+            </button>
+            <div class="collapsible-content">
+                <p>Details about my machine learning models, including implementation details and performance metrics.</p>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div id="education" class="tab-content">
+            <h2>Education</h2>
+
+            <!-- Master's Degree -->
+            <button class="collapsible active-collapsible">
+                <i class="fas fa-graduation-cap"></i> M.S. in Statistics
+            </button>
+            <div class="collapsible-content">
+                <div class="education-card">
+                    <p><strong>Institution:</strong> Florida State University, Tallahassee, USA</p>
+                    <p><strong>Coursework:</strong></p>
+                    <ul>
+                        <li>Computational Methods in Statistics I & II</li>
+                        <li>Statistics in Applications I, II & III</li>
+                        <li>Distribution Theory & Inference</li>
+                        <li>Time Series & Forecasting Methods</li>
+                        <li>Logistic Regression</li>
+                        <li>Applied Machine Learning</li>
+                        <li>Linear Statistical Models</li>
+                        <li>Engineering Data Analysis</li>
+                        <li>Internship in Statistics</li>
+                    </ul>
+                    <p><strong>Activities:</strong> Graduate Assistant – Developed a plug-and-play academic program website for the department.</p>
+                    <p><strong>Grade:</strong> 3.7/4</p>
+                </div>
+            </div>
+
+            <!-- Bachelor's Degree -->
+            <button class="collapsible active-collapsible">
+                <i class="fas fa-university"></i> B.S. in Electrical and Electronics Engineering
+            </button>
+            <div class="collapsible-content">
+                <div class="education-card">
+                    <p><strong>Institution:</strong> National Institute of Technology Karnataka, Surathkal, India</p>
+                    <p><strong>Coursework:</strong></p>
+                    <ul>
+                        <li>Computer Programming and Lab (C++)</li>
+                        <li>Calculus I, Calculus II</li>
+                        <li>Linear Algebra and Matrices</li>
+                        <li>Probability Theory and Applications</li>
+                        <li>Engineering Optimization</li>
+                        <li>Intermediate MATLAB Programming</li>
+                    </ul>
+                    <p><strong>Activities:</strong> Placement Coordinator – Achieved a 15% increase in placement offers, comprehensively coordinated the placement procedure for the class of 105 students.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Side Section -->
+        <div id="personal" class="tab-content">
+            <h2>Personal Side</h2>
+            <button class="collapsible active-collapsible">
+                Hobbies & Interests
+            </button>
+            <div class="collapsible-content">
+                <p>I enjoy hiking, reading science fiction novels, and experimenting with new cooking recipes on weekends.</p>
+            </div>
+            <button class="collapsible active-collapsible">
+                Volunteer Work & Extracurriculars
+            </button>
+            <div class="collapsible-content">
+                <p>Active volunteer at the local community center, teaching coding basics to underprivileged youth.</p>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact" class="tab-content">
+            <h2>Contact</h2>
+            <div class="contact-container">
+                <!-- Left Section: Image -->
+                <div class="contact-image">
+                    <img src="https://via.placeholder.com/300" alt="Profile Picture">
+                </div>
+
+                <!-- Right Section: Contact Information -->
+                <div class="contact-box">
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:ashrithssreddy@gmail.com">ashrithssreddy@gmail.com</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:8503395898">+1 (850) 339-5898</a></li>
+                        <li class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="badge">Austin, Texas, working remotely</span>
+                        </li>
+                        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">LinkedIn Profile</a></li>
+                        <li><i class="fab fa-github"></i> <a href="https://github.com/ashrithssreddy" target="_blank">GitHub Profile</a></li>
+                        <li><i class="fas fa-globe"></i> <a href="https://ashrithssreddy.github.io/" target="_blank">Website</a></li>
+                        <li><i class="fas fa-file-alt"></i> <a href="your-resume-link.pdf" target="_blank">Download Resume</a></li>
+                        <li><i class="fas fa-calendar-alt"></i> <a href="https://calendly.com/ashrithssreddy" target="_blank">Schedule a Meeting</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- End of Container -->
+
+    <!-- JavaScript for Tabs and Collapsible Sections -->
+    <script>
+        function openTab(evt, tabName) {
+            let i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
             }
-        });
-    }
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
 
-    // Set default active tab
-    document.getElementById('about').style.display = "block";
-</script>
+        // Activate all collapsible sections by default
+        document.addEventListener('DOMContentLoaded', () => {
+            let coll = document.getElementsByClassName("collapsible");
+            for (let i = 0; i < coll.length; i++) {
+                coll[i].classList.add("active-collapsible");
+            }
+
+            // Set default active tab
+            document.getElementById('about').style.display = "block";
+        });
+
+        // Toggle collapsible sections
+        let coll = document.getElementsByClassName("collapsible");
+        for (let i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active-collapsible");
+                let content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
