@@ -12,35 +12,65 @@
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            line-height: 1.6;
         }
         header {
             background-color: #4CAF50;
-            padding: 10px 0;
+            padding: 20px;
             text-align: center;
             color: white;
         }
+        nav {
+            background: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .profile-img {
+            display: block;
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
         section {
             padding: 20px;
-            margin: 20px auto;
-            max-width: 900px;
+            margin: 20px 0;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1 {
-            margin-bottom: 10px;
+        h1, h2 {
+            text-align: center;
         }
-        ul {
+        .links ul {
             list-style-type: none;
             padding: 0;
+            text-align: center;
         }
-        ul li {
-            margin: 10px 0;
+        .links ul li {
+            display: inline;
+            margin: 0 10px;
         }
-        a {
+        .links a {
             color: #4CAF50;
             text-decoration: none;
+            font-size: 18px;
         }
-        a:hover {
+        .links a:hover {
             text-decoration: underline;
         }
         footer {
@@ -59,26 +89,99 @@
     <p>Data Scientist | Technology Enthusiast | Creative Problem Solver</p>
 </header>
 
-<section>
-    <h2>About Me</h2>
-    <p>I'm a data scientist with a passion for solving complex problems using data-driven approaches. My experience spans across machine learning, statistics, and real-time analytics to deliver impactful solutions.</p>
-</section>
+<nav>
+    <a href="#about">About Me</a>
+    <a href="#resume">Resume</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#publications">Publications</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-<section>
-    <h2>Resume</h2>
-    <p>Download my resume: <a href="#" target="_blank">Click here</a></p>
-</section>
+<div class="container">
+    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm a data scientist with a passion for solving complex problems using data-driven approaches. My experience spans across machine learning, statistics, and real-time analytics to deliver impactful solutions.</p>
+    </section>
 
-<section>
-    <h2>Links</h2>
-    <ul>
-        <li><a href="#" target="_blank">LinkedIn</a></li>
-        <li><a href="#" target="_blank">GitHub</a></li>
-    </ul>
-</section>
+    <section id="resume">
+        <h2>Resume</h2>
+        <p>Download my resume: <a href="#" target="_blank">Click here</a></p>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <p>Here are some of the projects I've worked on:</p>
+        <ul>
+            <li><strong>Project 1:</strong> Data Analysis on E-commerce Trends - A detailed exploration of e-commerce sales data.</li>
+            <li><strong>Project 2:</strong> Predictive Modeling for Customer Churn - Using machine learning to predict customer churn rates.</li>
+            <li><strong>Project 3:</strong> Real-time Analytics Dashboard - Built an interactive dashboard for visualizing real-time data.</li>
+        </ul>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>Programming Languages: Python, R, SQL</li>
+            <li>Machine Learning: Scikit-Learn, TensorFlow, PyTorch</li>
+            <li>Data Visualization: Tableau, Matplotlib, Seaborn</li>
+            <li>Data Processing: Pandas, NumPy, Spark</li>
+            <li>Soft Skills: Problem-solving, Communication, Teamwork</li>
+        </ul>
+    </section>
+
+    <section id="publications">
+        <h2>Publications</h2>
+        <p>I've authored articles on data science and analytics:</p>
+        <ul>
+            <li><a href="#" target="_blank">Data Science in Retail: Analyzing Trends</a></li>
+            <li><a href="#" target="_blank">Machine Learning Algorithms Explained</a></li>
+        </ul>
+    </section>
+
+    <section id="certifications">
+        <h2>Certifications</h2>
+        <ul>
+            <li>Certified Data Scientist - DataCamp</li>
+            <li>Machine Learning Specialization - Coursera</li>
+            <li>Advanced SQL for Data Scientists - DataQuest</li>
+        </ul>
+    </section>
+
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <p>Explore my portfolio of data science projects, visualizations, and analytical tools:</p>
+        <ul>
+            <li><a href="#" target="_blank">E-commerce Data Analysis Dashboard</a></li>
+            <li><a href="#" target="_blank">Machine Learning Model Repository</a></li>
+        </ul>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <p>Highlights of my professional experience:</p>
+        <ul>
+            <li><strong>Data Scientist at XYZ Corp:</strong> Developed predictive models to enhance marketing strategies (2021-Present).</li>
+            <li><strong>Data Analyst at ABC Inc:</strong> Conducted exploratory data analysis for business insights (2018-2021).</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Get in touch:</p>
+        <p>Email: <a href="mailto:florida.man@example.com">florida.man@example.com</a></p>
+        <p>LinkedIn: <a href="#" target="_blank">LinkedIn Profile</a></p>
+        <p>GitHub: <a href="#" target="_blank">GitHub Profile</a></p>
+    </section>
+</div>
 
 <footer>
-    <p>Contact: <a href="mailto:florida.man@example.com">florida.man@example.com</a></p>
+    <p>&copy; 2024 Florida Man. All rights reserved.</p>
 </footer>
 
 </body>
