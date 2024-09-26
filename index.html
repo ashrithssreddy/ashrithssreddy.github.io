@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ashrith Reddy - Professional Webpage</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f4;
             color: #333;
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
         }
         header {
             background-color: #4CAF50;
@@ -20,65 +18,56 @@
             text-align: center;
             color: white;
         }
-        nav {
-            background: #333;
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        .tab {
+            padding: 15px;
+            cursor: pointer;
             color: white;
-            padding: 10px 0;
             text-align: center;
+            flex: 1;
         }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 16px;
+        .tab:hover, .active {
+            background-color: #4CAF50;
         }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            overflow: hidden;
-        }
-        .profile-img {
-            display: block;
-            max-width: 150px;
-            height: auto;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-        }
-        section {
+        .tab-content {
+            display: none;
             padding: 20px;
-            margin: 20px 0;
+            margin: 20px;
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        h1, h2 {
-            text-align: center;
+        .active-content {
+            display: block;
         }
-        .links ul {
-            list-style-type: none;
-            padding: 0;
-            text-align: center;
-        }
-        .links ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-        .links a {
-            color: #4CAF50;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .links a:hover {
-            text-decoration: underline;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
+        .collapsible {
+            background-color: #4CAF50;
             color: white;
-            margin-top: 20px;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .collapsible:after {
+            content: '+';
+            font-size: 18px;
+            float: right;
+        }
+        .active-collapsible:after {
+            content: '-';
+        }
+        .collapsible-content {
+            padding: 0 15px;
+            display: none;
+            overflow: hidden;
+            background-color: #f9f9f9;
         }
     </style>
 </head>
@@ -89,109 +78,137 @@
     <p>Data Scientist | Technology Enthusiast | Creative Problem Solver</p>
 </header>
 
-<nav>
-    <a href="#about">About Me</a>
-    <a href="#resume">Resume</a>
-    <a href="#projects">Projects</a>
-    <a href="#skills">Skills</a>
-    <a href="#publications">Publications</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#experience">Experience</a>
-    <a href="#contact">Contact</a>
-</nav>
-
-<div class="container">
-    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img">
-    
-    <section id="about">
-        <h2>About Me</h2>
-        <p>I'm a data scientist with a passion for solving complex problems using data-driven approaches. My experience spans across machine learning, statistics, and real-time analytics to deliver impactful solutions.</p>
-    </section>
-
-    <section id="resume">
-        <h2>Resume</h2>
-        <p>Download my resume: <a href="#" target="_blank">Click here</a></p>
-    </section>
-
-    <section id="projects">
-        <h2>Projects</h2>
-        <p>Here are some of the projects I've worked on:</p>
-        <ul>
-            <li><strong>Project 1:</strong> Data Analysis on E-commerce Trends - A detailed exploration of e-commerce sales data.</li>
-            <li><strong>Project 2:</strong> Predictive Modeling for Customer Churn - Using machine learning to predict customer churn rates.</li>
-            <li><strong>Project 3:</strong> Real-time Analytics Dashboard - Built an interactive dashboard for visualizing real-time data.</li>
-        </ul>
-    </section>
-
-    <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>Programming Languages: Python, R, SQL</li>
-            <li>Machine Learning: Scikit-Learn, TensorFlow, PyTorch</li>
-            <li>Data Visualization: Tableau, Matplotlib, Seaborn</li>
-            <li>Data Processing: Pandas, NumPy, Spark</li>
-            <li>Soft Skills: Problem-solving, Communication, Teamwork</li>
-        </ul>
-    </section>
-
-    <section id="publications">
-        <h2>Publications</h2>
-        <p>I've authored articles on data science and analytics:</p>
-        <ul>
-            <li><a href="#" target="_blank">Data Science in Retail: Analyzing Trends</a></li>
-            <li><a href="#" target="_blank">Machine Learning Algorithms Explained</a></li>
-        </ul>
-    </section>
-
-    <section id="certifications">
-        <h2>Certifications</h2>
-        <ul>
-            <li>Certified Data Scientist - DataCamp</li>
-            <li>Machine Learning Specialization - Coursera</li>
-            <li>Advanced SQL for Data Scientists - DataQuest</li>
-        </ul>
-    </section>
-
-    <section id="portfolio">
-        <h2>Portfolio</h2>
-        <p>Explore my portfolio of data science projects, visualizations, and analytical tools:</p>
-        <ul>
-            <li><a href="#" target="_blank">E-commerce Data Analysis Dashboard</a></li>
-            <li><a href="#" target="_blank">Machine Learning Model Repository</a></li>
-        </ul>
-    </section>
-
-    <section id="experience">
-        <h2>Experience</h2>
-        <p>Highlights of my professional experience:</p>
-        <ul>
-            <li><strong>Data Scientist at XYZ Corp:</strong> Developed predictive models to enhance marketing strategies (2021-Present).</li>
-            <li><strong>Data Analyst at ABC Inc:</strong> Conducted exploratory data analysis for business insights (2018-2021).</li>
-        </ul>
-    </section>
-
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Get in touch:</p>
-        <p>Email: <a href="mailto:ashrithssreddy@gmail.com">ashrithssreddy@gmail.com</a></p>
-        <p>Phone: <a href="tel:8503395898">+1 (850) 339-5898</a></p>
-        <p>Location: Austin, Texas</p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">LinkedIn Profile</a></p>
-        <p>GitHub: <a href="https://github.com/ashrithssreddy" target="_blank">GitHub Profile</a></p>
-        <p>Twitter: <a href="https://x.com/ashrithssreddy/" target="_blank">X</a></p>
-        <p>Website: <a href="https://ashrithssreddy.github.io/" target="_blank">Website</a></p>
-        <p>Resume: <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">Download</a></p>
-        <p>Schedule a Meeting: <a href="https://calendly.com/ashrithssreddy" target="_blank">Book here</a></p>
-        <p>WhatsApp: <a href="https://wa.me/18503395898" target="_blank">Message me</a></p>
-    </section>
-    
-
+<div class="tab-container">
+    <div class="tab active" onclick="openTab(event, 'about')">About Me</div>
+    <div class="tab" onclick="openTab(event, 'projects')">Projects</div>
+    <div class="tab" onclick="openTab(event, 'experience')">Experience</div>
+    <div class="tab" onclick="openTab(event, 'skills')">Skills</div>
+    <div class="tab" onclick="openTab(event, 'publications')">Publications</div>
+    <div class="tab" onclick="openTab(event, 'certifications')">Certifications</div>
+    <div class="tab" onclick="openTab(event, 'portfolio')">Portfolio</div>
+    <div class="tab" onclick="openTab(event, 'contact')">Contact</div>
 </div>
 
-<footer>
-    <p>&copy; 2024 Ashrith Reddy. All rights reserved.</p>
-</footer>
+<div id="about" class="tab-content active-content">
+    <h2>About Me</h2>
+    <p>I'm a data scientist with a passion for solving complex problems using data-driven approaches. My experience spans across machine learning, statistics, and real-time analytics to deliver impactful solutions.</p>
+</div>
+
+<div id="projects" class="tab-content">
+    <h2>Projects</h2>
+    <button class="collapsible">Project 1: Data Analysis on E-commerce Trends</button>
+    <div class="collapsible-content">
+        <p>A detailed exploration of e-commerce sales data...</p>
+    </div>
+    <button class="collapsible">Project 2: Predictive Modeling for Customer Churn</button>
+    <div class="collapsible-content">
+        <p>Using machine learning to predict customer churn rates...</p>
+    </div>
+    <button class="collapsible">Project 3: Real-time Analytics Dashboard</button>
+    <div class="collapsible-content">
+        <p>Built an interactive dashboard for visualizing real-time data...</p>
+    </div>
+</div>
+
+<div id="experience" class="tab-content">
+    <h2>Experience</h2>
+    <button class="collapsible">Data Scientist at XYZ Corp (2021-Present)</button>
+    <div class="collapsible-content">
+        <p>Developed predictive models to enhance marketing strategies...</p>
+    </div>
+    <button class="collapsible">Data Analyst at ABC Inc (2018-2021)</button>
+    <div class="collapsible-content">
+        <p>Conducted exploratory data analysis for business insights...</p>
+    </div>
+</div>
+
+<div id="skills" class="tab-content">
+    <h2>Skills</h2>
+    <ul>
+        <li>Programming Languages: Python, R, SQL</li>
+        <li>Machine Learning: Scikit-Learn, TensorFlow, PyTorch</li>
+        <li>Data Visualization: Tableau, Matplotlib, Seaborn</li>
+        <li>Data Processing: Pandas, NumPy, Spark</li>
+        <li>Soft Skills: Problem-solving, Communication, Teamwork</li>
+    </ul>
+</div>
+
+<div id="publications" class="tab-content">
+    <h2>Publications</h2>
+    <button class="collapsible">Data Science in Retail: Analyzing Trends</button>
+    <div class="collapsible-content">
+        <p>Details about this publication...</p>
+    </div>
+    <button class="collapsible">Machine Learning Algorithms Explained</button>
+    <div class="collapsible-content">
+        <p>Details about this publication...</p>
+    </div>
+</div>
+
+<div id="certifications" class="tab-content">
+    <h2>Certifications</h2>
+    <ul>
+        <li>Certified Data Scientist - DataCamp</li>
+        <li>Machine Learning Specialization - Coursera</li>
+        <li>Advanced SQL for Data Scientists - DataQuest</li>
+    </ul>
+</div>
+
+<div id="portfolio" class="tab-content">
+    <h2>Portfolio</h2>
+    <button class="collapsible">E-commerce Data Analysis Dashboard</button>
+    <div class="collapsible-content">
+        <p>Explore my work on the e-commerce data analysis dashboard...</p>
+    </div>
+    <button class="collapsible">Machine Learning Model Repository</button>
+    <div class="collapsible-content">
+        <p>Details about my machine learning models...</p>
+    </div>
+</div>
+
+<div id="contact" class="tab-content">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:ashrithssreddy@gmail.com">ashrithssreddy@gmail.com</a></p>
+    <p>Phone: <a href="tel:8503395898">+1 (850) 339-5898</a></p>
+    <p>Location: Austin, Texas</p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">LinkedIn Profile</a></p>
+    <p>GitHub: <a href="https://github.com/ashrithssreddy" target="_blank">GitHub Profile</a></p>
+    <p>Website: <a href="https://ashrithssreddy.github.io/" target="_blank">Website</a></p>
+    <p>Resume: <a href="https://www.linkedin.com/in/ashrithssreddy/" target="_blank">Download</a></p>
+    <p>Schedule a Meeting: <a href="https://calendly.com/ashrithssreddy" target="_blank">Book here</a></p>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        let i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tab");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    let coll = document.getElementsByClassName("collapsible");
+    for (let i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active-collapsible");
+            let content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+
+    // Set default active tab
+    document.getElementById('about').style.display = "block";
+</script>
 
 </body>
 </html>
