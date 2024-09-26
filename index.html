@@ -15,8 +15,17 @@
         header {
             background-color: #4CAF50;
             padding: 20px;
-            text-align: center;
             color: white;
+            display: flex;
+            align-items: center;
+        }
+        .profile-img {
+            max-width: 100px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .header-text {
+            flex-grow: 1;
         }
         .tab-container {
             display: flex;
@@ -74,8 +83,12 @@
 <body>
 
 <header>
-    <h1>Ashrith Reddy</h1>
-    <p>Data Scientist | Technology Enthusiast | Creative Problem Solver</p>
+    <!-- Placeholder image at the top left -->
+    <img src="https://via.placeholder.com/100" alt="Ashrith Reddy" class="profile-img">
+    <div class="header-text">
+        <h1>Ashrith Reddy</h1>
+        <p>Data Scientist | Technology Enthusiast | Creative Problem Solver</p>
+    </div>
 </header>
 
 <div class="tab-container">
