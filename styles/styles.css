@@ -1,0 +1,204 @@
+/* Global Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+/* Header Styling */
+header {
+    background-color: #fff;
+    padding: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.profile-img {
+    max-width: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.header-text {
+    flex-grow: 1;
+}
+.header-text h1 {
+    margin: 0;
+    font-size: 2em;
+}
+.header-text p {
+    margin: 5px 0 0;
+    font-size: 1.1em;
+    color: #666;
+}
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.tab-container {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    padding: 10px 0;
+    border-radius: 8px;
+    margin: 20px auto 0;
+    flex-wrap: wrap;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+.tab:hover, .active {
+    background-color: #4CAF50;
+}
+.tab-content {
+    display: none;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 900px;
+}
+.active-content {
+    display: block;
+}
+.collapsible {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    margin-top: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+}
+.collapsible:hover {
+    background-color: #45a049;
+}
+.collapsible:after {
+    content: '\\f078';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-left: auto;
+    transition: transform 0.3s;
+}
+.active-collapsible:after {
+    transform: rotate(180deg);
+}
+.collapsible-content {
+    padding: 20px;
+    display: block;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+.education-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+}
+.contact-container {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+    max-width: 900px;
+}
+.contact-image {
+    flex: 0 0 auto;
+    margin-right: 20px;
+}
+.contact-image img {
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+.contact-box {
+    flex: 1 1 auto;
+    min-width: 250px;
+}
+#contact ul {
+    list-style-type: none;
+    padding: 0;
+}
+#contact li {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 18px;
+}
+#contact li i {
+    margin-right: 10px;
+    color: #4CAF50;
+}
+#contact .location {
+    color: #666;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+}
+#contact .location .badge {
+    background-color: #e0f7fa;
+    color: #00796b;
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: 600;
+}
+a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .contact-image, .contact-box {
+        margin-left: 0;
+        width: 100%;
+    }
+    .tab-container {
+        flex-direction: column;
+    }
+    .tab {
+        width: 100%;
+        text-align: left;
+    }
+}
+"""
+
+### 4. **`sections/about.html`**
+```html
+<h2>About Me</h2>
+<p>I'm a data scientist with a passion for solving complex problems using data-driven approaches. My experience spans across machine learning, statistics, and real-time analytics to deliver impactful solutions.</p>
