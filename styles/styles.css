@@ -7,6 +7,7 @@ body {
     padding: 0;
     line-height: 1.6;
 }
+
 /* Header Styling */
 header {
     background-color: #fff;
@@ -39,6 +40,8 @@ header {
     margin: 0 auto;
     padding: 0 20px;
 }
+
+/* Tab Container */
 .tab-container {
     display: flex;
     justify-content: center;
@@ -61,18 +64,8 @@ header {
 .tab:hover, .active {
     background-color: #4CAF50;
 }
-.tab-content {
-    display: none;
-    padding: 20px;
-    margin: 20px auto;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    max-width: 900px;
-}
-.active-content {
-    display: block;
-}
+
+/* Collapsible Button Styles */
 .collapsible {
     background-color: #4CAF50;
     color: white;
@@ -80,28 +73,39 @@ header {
     padding: 15px;
     width: 100%;
     border: none;
-    text-align: left;
+    text-align: left; /* Ensure text is left aligned */
     outline: none;
     font-size: 18px;
     margin-top: 10px;
     border-radius: 8px;
     transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
+    display: flex; /* Use flexbox */
+    justify-content: space-between; /* Space out text and icon */
+    align-items: center; /* Vertically center items */
 }
+
 .collapsible:hover {
     background-color: #45a049;
 }
+
+/* Toggle Icon */
 .collapsible:after {
-    content: '\\f078';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    margin-left: auto;
+    content: '';
+    display: inline-block;
+    width: 20px; /* Adjust width as necessary */
+    height: 20px; /* Adjust height as necessary */
+    background-image: url('images/image.png'); /* Path to your uploaded image */
+    background-size: contain; /* Ensures the image fits well */
+    background-repeat: no-repeat; /* Prevents repeating the image */
+    margin-left: auto; /* Aligns it to the right */
     transition: transform 0.3s;
 }
+
 .active-collapsible:after {
-    transform: rotate(180deg);
+    transform: rotate(180deg); /* Rotate the image when active */
 }
+
+/* Collapsible Content Styles */
 .collapsible-content {
     padding: 20px;
     display: block;
@@ -119,6 +123,8 @@ header {
     border: 1px solid #ddd;
     margin-top: 10px;
 }
+
+/* Contact Styles */
 .contact-container {
     display: flex;
     align-items: flex-start;
@@ -179,6 +185,8 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* Responsive Styles */
 @media (max-width: 768px) {
     .contact-container {
         flex-direction: column;
@@ -188,17 +196,4 @@ a:hover {
         margin-left: 0;
         width: 100%;
     }
-    .tab-container {
-        flex-direction: column;
-    }
-    .tab {
-        width: 100%;
-        text-align: left;
-    }
 }
-"""
-
-### 4. **`sections/about.html`**
-```html
-<h2>About Me</h2>
-<p>I'm a data scientist with a passion for solving complex problems using data-driven approaches. My experience spans across machine learning, statistics, and real-time analytics to deliver impactful solutions.</p>
