@@ -73,15 +73,15 @@ header {
     padding: 15px;
     width: 100%;
     border: none;
-    text-align: left; /* Ensure text is left aligned */
+    text-align: left;
     outline: none;
     font-size: 18px;
     margin-top: 10px;
     border-radius: 8px;
     transition: background-color 0.3s;
-    display: flex; /* Use flexbox */
-    justify-content: space-between; /* Space out text and icon */
-    align-items: center; /* Vertically center items */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .collapsible:hover {
@@ -92,17 +92,17 @@ header {
 .collapsible:after {
     content: '';
     display: inline-block;
-    width: 20px; /* Adjust width as necessary */
-    height: 20px; /* Adjust height as necessary */
-    background-image: url('images/image.png'); /* Path to your uploaded image */
-    background-size: contain; /* Ensures the image fits well */
-    background-repeat: no-repeat; /* Prevents repeating the image */
-    margin-left: auto; /* Aligns it to the right */
+    width: 20px;
+    height: 20px;
+    background-image: url('images/image.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: auto;
     transition: transform 0.3s;
 }
 
 .active-collapsible:after {
-    transform: rotate(180deg); /* Rotate the image when active */
+    transform: rotate(180deg);
 }
 
 /* Collapsible Content Styles */
@@ -196,4 +196,35 @@ a:hover {
         margin-left: 0;
         width: 100%;
     }
+}
+
+/* Skill Card Styles */
+.skill-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s;
+}
+
+.skill-card:hover {
+    transform: scale(1.05);
+}
+
+.skill-card-icon {
+    font-size: 2em;
+    color: #4CAF50;
+    margin-right: 15px;
+}
+
+.skill-card-content {
+    flex-grow: 1;
+}
+
+.skill-card-content h3 {
+    margin: 0;
+    font-size: 1.5em;
 }
