@@ -35,5 +35,5 @@ function attachCollapsibleEventListeners() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadSection('about');
+    loadSection('about_me');
 });
