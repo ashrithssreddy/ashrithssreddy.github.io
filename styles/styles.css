@@ -80,27 +80,18 @@ header {
     border-radius: 8px;
     transition: background-color 0.3s;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Space out logo, text, and arrow */
     align-items: center;
-    position: relative; /* Added for absolute positioning of arrow */
 }
 
-/* Toggle Icon */
-.collapsible:after {
-    content: '';
-    position: absolute; /* Absolute positioning */
-    right: 20px; /* Move the icon to the rightmost corner */
-    width: 20px;
-    height: 20px;
-    background-image: url('images/image.png'); /* Use the uploaded image */
-    background-size: contain;
-    background-repeat: no-repeat;
-    transition: transform 0.3s;
+/* Icon and Text Spacing */
+.collapsible i {
+    margin-right: 10px; /* Add space between the logo and the text */
 }
 
-/* Rotate the icon when active */
-.active-collapsible:after {
-    transform: rotate(180deg);
+/* Arrow Icon */
+.arrow-icon {
+    margin-left: auto; /* Move the arrow to the far right */
 }
 
 /* Collapsible Content Styles */
