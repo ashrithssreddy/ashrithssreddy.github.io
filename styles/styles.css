@@ -82,25 +82,23 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.collapsible:hover {
-    background-color: #45a049;
+    position: relative; /* Added for absolute positioning of arrow */
 }
 
 /* Toggle Icon */
 .collapsible:after {
     content: '';
-    display: inline-block;
+    position: absolute; /* Absolute positioning */
+    right: 20px; /* Move the icon to the rightmost corner */
     width: 20px;
     height: 20px;
-    background-image: url('images/image.png');
+    background-image: url('images/image.png'); /* Use the uploaded image */
     background-size: contain;
     background-repeat: no-repeat;
-    margin-left: auto;
     transition: transform 0.3s;
 }
 
+/* Rotate the icon when active */
 .active-collapsible:after {
     transform: rotate(180deg);
 }
