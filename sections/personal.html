@@ -1,19 +1,202 @@
-<h2>Personal Side</h2>
-<button class="collapsible">
-    Hobbies & Interests
-    <i class="fas fa-chevron-down"></i>
-</button>
-<div class="collapsible-content">
-    <p>I enjoy hiking, reading science fiction novels, and experimenting with new cooking recipes on weekends.</p>
-</div>
-<button class="collapsible">
-    Volunteer Work & Extracurriculars
-    <i class="fas fa-chevron-down"></i>
-</button>
-<div class="collapsible-content">
-    <p>Active volunteer at the local community center, teaching coding basics to underprivileged youth.</p>
-</div>
+<head>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your existing CSS file -->
+    <style>
+        /* Timeline container */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
 
+        /* Timeline line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: #4CAF50;
+            transform: translateX(-50%);
+        }
 
-https://stackoverflow.com/users/6323610/ashrith-reddy
-<p><strong>Beyond the Office:</strong> Outside of work, I engage in post-WW2 and economic history discussions and enjoy unwinding at the beach. I'm a cricket hobbyist, documentaries fanatic, and gadget enthusiast. 
+        /* Timeline item */
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        /* Alternating left and right alignment */
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Content card */
+        .content {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            border: 1px solid #ddd;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Hover effects for content cards */
+        .content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Circle for each date */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 15px;
+            height: 15px;
+            background: #4CAF50;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        /* Date styling, positioned next to the circle */
+        .timeline-date {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4CAF50;
+            position: absolute;
+            top: 0;
+            transform: translateY(-50%);
+        }
+
+        /* Position the date next to the circle */
+        .timeline-item:nth-child(odd) .timeline-date {
+            right: 52%; /* Move to the left side */
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            left: 52%; /* Move to the right side */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-item .content {
+                width: 80%;
+                margin: 20px auto;
+            }
+
+            /* Adjust date position for small screens */
+            .timeline-item .timeline-date {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2 style="text-align:center;">My Personal Journey</h2>
+
+    <div class="timeline">
+        <!-- Timeline Item 1 (Left) -->
+        <div class="timeline-item">
+            <div class="timeline-date">1994</div>
+            <div class="content">
+                <p>Born :)</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 2 (Right) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2008</div>
+            <div class="content">
+                <p>Moved to Bangalore (India) in pursuit of better educational opportunities. It was here in Asia's Silicon Valley that I wrote my first line of code, sparking a lifelong fascination with the limitless power of computing.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 3 (Left) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2011</div>
+            <div class="content">
+                <p>Started my B.S. in Electrical Engineering, living in a dorm room right on the beach! First encounter with data in an undergrad course and watching Moneyball (starring Brad Pitt) sparked my interest in information theory, programming, and its application in real-world business settings.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 4 (Right) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2015</div>
+            <div class="content">
+                <p>Landed my first job as a Data Scientist at Mu Sigma Business Solutions and received my first paycheck! I tackled business problems for Fortune 500 clients using data. The highlight? Seeing my work mentioned in the <a href="https://www.wsj.com/articles/data-helps-espn-customize-ads-for-sports-fans-leanings-1463482861" target="_blank">Wall Street Journal</a>, which fueled my motivation to make a real-world impact.</p>
+            </div>
+        </div>
+        
+        <!-- Timeline Item 5 (Left) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2017</div>
+            <div class="content">
+                <p>Invited to join a startup that would go on to shatter industry records. This became the most productive phase of my life, where the fast-paced, high-pressure, and innovation-driven nature of the startup world transformed me. I learned to embrace uncertainty, adapt quickly, and push the boundaries of what I thought was possible.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 6 (Right) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2020</div>
+            <div class="content">
+                <p>Amidst the uncertainty of the COVID era, I began my master's degree. While I was already skilled in programming and consulting, I realized that a deeper understanding of the mathematics behind data science was the missing piece in my journey to becoming the best data scientist. This drive to fill that gap pushed me to pursue my master's.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 7 (Left) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2021</div>
+            <div class="content">
+                <p>Moved to America, with Florida as the perfect destination for a beach lover like me! This move brought profound changes. I embraced new cultural experiences, developed a deep appreciation for personal freedoms, and rediscovered my love for the beach lifestyle, fostering a renewed sense of balance and independence.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 8 (Right) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2022</div>
+            <div class="content">
+                <p>Rehired by TheMathCompany to take on a pivotal role in a new geography, reflecting the trust and confidence earned in previous positions.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 9 (Left) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2023</div>
+            <div class="content">
+                <p>Successfully led my first team, solving complex business problems that drove critical product decisions directly affecting millions of consumers. This role marked a significant step in my career, showcasing my leadership and data-driven decision-making abilities. <a href="https://www.linkedin.com/in/ashrithssreddy/details/recommendations/">See recommendations</a>.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 10 (Right) -->
+        <div class="timeline-item">
+            <div class="timeline-date">2024</div>
+            <div class="content">
+                <!-- <p>Now that I'm in the heart of technological innovation, my fascination with augmented reality, generative AI, and cryptographic ledgers has only grown. This year, I’m open to blending these technologies into my data science toolkit, enhancing my ability to deliver cutting-edge solutions for complex problems.</p> -->
+                <p>
+                    A year of firsts: made my first Bitcoin transaction, bought my first augmented reality hardware, and built my first generative AI product. Exploring new frontiers, one leap at a time!
+                </p>
+            </div>
+        </div>
+
+    </div>
+</body>
