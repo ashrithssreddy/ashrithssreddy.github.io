@@ -217,3 +217,14 @@ a:hover {
     margin: 0;
     font-size: 1.5em;
 }
+
+
+.goodreads-button {
+    background-color: #372213; /* Goodreads' signature color */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
