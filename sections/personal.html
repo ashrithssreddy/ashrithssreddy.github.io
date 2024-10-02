@@ -1,7 +1,6 @@
 <head>
     <link rel="stylesheet" href="styles.css"> <!-- Link to your existing CSS file -->
-    <!-- Add Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome for icons -->
     <style>
         /* Timeline container */
         .timeline {
@@ -60,18 +59,29 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        /* Circle for each date */
+        /* Circle for each date with icon */
         .timeline-item::before {
             content: '';
             position: absolute;
             left: 50%;
-            width: 15px;
-            height: 15px;
+            width: 40px;
+            height: 40px;
             background: #4CAF50;
             border-radius: 50%;
             border: 3px solid #ffffff;
             transform: translateX(-50%);
             z-index: 1;
+        }
+
+        /* Icon styling */
+        .timeline-item i {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #ffffff;
+            font-size: 18px;
+            z-index: 2;
         }
 
         /* Date styling, positioned next to the circle */
@@ -82,13 +92,6 @@
             position: absolute;
             top: 0;
             transform: translateY(-50%);
-            display: flex;
-            align-items: center;
-        }
-
-        /* Icons for each timeline entry */
-        .timeline-date i {
-            margin-right: 8px; /* Space between the icon and the date */
         }
 
         /* Position the date next to the circle */
@@ -126,7 +129,8 @@
     <div class="timeline">
         <!-- Timeline Item 1 (Left) -->
         <div class="timeline-item">
-            <div class="timeline-date"><i class="fas fa-baby"></i> 1994</div>
+            <i class="fas fa-baby"></i> <!-- Baby icon for birth -->
+            <div class="timeline-date">1994</div>
             <div class="content">
                 <p>Born :)</p>
             </div>
@@ -134,63 +138,83 @@
 
         <!-- Timeline Item 2 (Right) -->
         <div class="timeline-item">
-            <div class="timeline-date"><i class="fas fa-graduation-cap"></i> 2008</div>
+            <i class="fas fa-laptop-code"></i> <!-- Code icon for first line of code -->
+            <div class="timeline-date">2008</div>
             <div class="content">
-                <p>Moved to Bangalore for better educational opportunities. This was also the year I wrote my first line of code and became fascinated with the power of computing.</p>
+                <p>Moved to Bangalore (India) in pursuit of better educational opportunities. It was here in Asia's Silicon Valley that I wrote my first line of code, sparking a lifelong fascination with the limitless power of computing.</p>
             </div>
         </div>
 
         <!-- Timeline Item 3 (Left) -->
         <div class="timeline-item">
-            <div class="timeline-date"><i class="fas fa-university"></i> 2011</div>
+            <i class="fas fa-graduation-cap"></i> <!-- Graduation cap icon for college -->
+            <div class="timeline-date">2011</div>
             <div class="content">
-                <p>Started my B.S. in Electrical Engineering, living in a dorm room right on the beach! This is where I first encountered data. Watching <em>Moneyball</em> (starring Brad Pitt) sparked my interest in information theory, programming, and its application in real-world business settings.</p>
+                <p>Started my B.S. in Electrical Engineering, living in a dorm room right on the beach! First encounter with data in an undergrad course and watching Moneyball (starring Brad Pitt) sparked my interest in information theory, programming, and its application in real-world business settings.</p>
             </div>
         </div>
 
         <!-- Timeline Item 4 (Right) -->
         <div class="timeline-item">
-            <div class="timeline-date"><i class="fas fa-briefcase"></i> 2015</div>
+            <i class="fas fa-briefcase"></i> <!-- Briefcase icon for first job -->
+            <div class="timeline-date">2015</div>
             <div class="content">
-                <p>First job as a Data Scientist at Mu Sigma Business Solutions. Solved business problems for Fortune 500 clients using data, and got super motivated when my work was mentioned in the <em>Wall Street Journal</em>, making a real-world impact.</p>
+                <p>Landed my first job and received my first paycheck! The highlight? Seeing my work mentioned in the <a href="https://www.wsj.com/articles/data-helps-espn-customize-ads-for-sports-fans-leanings-1463482861" target="_blank">Wall Street Journal</a> and mentoring 100s of folks fueled my motivation.</p>
             </div>
         </div>
 
         <!-- Timeline Item 5 (Left) -->
-        <div class="timeline-date"><i class="fas fa-book"></i> 2020</div>
-        <div class="content">
-            <p>In 2020, amidst the uncertainty of the COVID era, I began my master’s degree. While I was already skilled in programming and consulting, I realized that a deeper understanding of the mathematics behind data science was the missing piece in my journey to becoming the best data scientist. This drive to fill that gap pushed me to pursue my master's.</p>
+        <div class="timeline-item">
+            <i class="fas fa-rocket"></i> <!-- Rocket icon for startup experience -->
+            <div class="timeline-date">2017</div>
+            <div class="content">
+                <p>Invited to join a startup that would go on to shatter industry records. This became the most productive phase of my life, where the fast-paced, high-pressure, and innovation-driven nature of the startup world transformed me. I learned to embrace uncertainty, adapt quickly, and push the boundaries of what I thought was theoretically possible.</p>
+            </div>
         </div>
 
         <!-- Timeline Item 6 (Right) -->
         <div class="timeline-item">
-            <div class="timeline-date"><i class="fas fa-plane"></i> 2021</div>
+            <i class="fas fa-university"></i> <!-- University icon for master's degree -->
+            <div class="timeline-date">2020</div>
             <div class="content">
-                <p>Moved to America, with Florida being the natural destination for a beach lover like me! This move sparked a transformation in me. I embraced cultural assimilation, developed a deep appreciation for personal liberties, and rediscovered my love for the beach lifestyle, bringing a refreshing balance to my life.</p>
+                <p>Amidst the uncertainty of the COVID era, I began my master's degree. While I was already skilled in programming and consulting, I realized that a deeper understanding of the mathematics behind data science was the missing piece in my journey to becoming the best data scientist. This drive to fill that gap pushed me to pursue my master's.</p>
             </div>
         </div>
 
         <!-- Timeline Item 7 (Left) -->
         <div class="timeline-item">
-            <div class="timeline-date"><i class="fas fa-rocket"></i> 2022</div>
+            <i class="fas fa-plane"></i> <!-- Plane icon for moving to America -->
+            <div class="timeline-date">2021</div>
             <div class="content">
-                <p>Rehired by TheMathCompany to take on a pivotal role in a new geography. This opportunity was a testament to the trust and confidence I had built in my previous positions, marking a new chapter in my career with greater responsibilities and challenges.</p>
+                <p>Move to America brought profound changes, with Florida as the perfect destination for a beach lover like me! I embraced new cultural experiences, developed a deep appreciation for personal freedoms, and rediscovered my love for the beach lifestyle, fostering a renewed sense of balance and independence.</p>
             </div>
         </div>
 
         <!-- Timeline Item 8 (Right) -->
         <div class="timeline-item">
-            <div class="timeline-date"><i class="fas fa-users"></i> 2023</div>
+            <i class="fas fa-handshake"></i> <!-- Handshake icon for rehiring -->
+            <div class="timeline-date">2022</div>
             <div class="content">
-                <p>Successfully led my first team, solving complex business problems that drove critical product decisions directly affecting millions of consumers. This role marked a significant step in my career, showcasing my leadership and data-driven decision-making abilities. <a href="https://www.linkedin.com/in/ashrithssreddy/details/recommendations/">See recommendations</a>.</p>
+                <p>Rehired by TheMathCompany to take on a pivotal role in a new geography, reflecting the trust and confidence earned in previous positions.</p>
             </div>
         </div>
 
         <!-- Timeline Item 9 (Left) -->
         <div class="timeline-item">
-            <div class="timeline-date"><i class="fas fa-lightbulb"></i> 2024</div>
+            <i class="fas fa-users"></i> <!-- Users icon for team leadership -->
+            <div class="timeline-date">2023</div>
             <div class="content">
-                <p>A year of firsts: made my first Bitcoin transaction, experimented with augmented reality hardware, and built my first generative AI product. Exploring new frontiers, one leap at a time!</p>
+                <p>Successfully led my first team, solving complex business problems that drove critical product decisions directly affecting millions of consumers. This role marked a significant step in my career, showcasing my leadership and data-driven decision-making abilities. <a href="https://www.linkedin.com/in/ashrithssreddy/details/recommendations/">See recommendations</a>.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 10 (Right) -->
+        <div class="timeline-item">
+            <i class="fas fa-rocket"></i> <!-- Rocket icon for exploration and firsts -->
+            <div class="timeline-date">2024</div>
+            <div class="content">
+                <p>A year of firsts: made my first Bitcoin transaction, bought my first Augmented Reality hardware, and built my first Generative AI product.</p>
+                <p>Exploring new frontiers and embracing the future, one leap at a time!</p>
             </div>
         </div>
     </div>
