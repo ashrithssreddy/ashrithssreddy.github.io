@@ -35,5 +35,5 @@ function attachCollapsibleEventListeners() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadSection('professional_journey');
+    loadSection('professional_summary');
 });
