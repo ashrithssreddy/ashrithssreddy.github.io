@@ -116,39 +116,57 @@ header {
 /* Contact Styles */
 .contact-container {
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; /* Align items to the top */
     padding: 20px;
     margin: 20px auto;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex-wrap: wrap;
     max-width: 900px;
 }
+
 .contact-image {
     flex: 0 0 auto;
-    margin-right: 20px;
+    margin-right: 55px; /* Increase the right margin to create a larger gap */
+    padding-right: 0; /* Remove any additional padding */
 }
+
+
 .contact-image img {
-    max-width: 300px;
+    width: 100%; /* Allow the image to use the available width */
+    max-width: 350px; /* Set a larger maximum width */
+    height: auto; /* Maintain aspect ratio */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
 }
+
+
+
 .contact-box {
-    flex: 1 1 auto;
-    min-width: 250px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.contact-box p {
+    margin: 0 0 20px;
+}
+
 #contact ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
+
+
 #contact li {
     display: flex;
     align-items: center;
     margin: 10px 0;
-    font-size: 18px;
+    font-size: 30px; /* Increase font size */
 }
+
 #contact li i {
     margin-right: 10px;
     color: #4CAF50;
