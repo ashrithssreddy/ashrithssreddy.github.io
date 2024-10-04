@@ -21,7 +21,7 @@ function updateActiveTab(sectionName) {
 
 function attachCollapsibleEventListeners(sectionName) {
     // Define an array of sections that should have their collapsibles collapsed by default
-    const collapsibleSections = ['certifications', 'education', 'experience','ashrith_bookshelf']; // Add or remove section names as needed
+    const collapsibleSections = ['certifications', 'experience','ashrith_bookshelf']; // Add or remove section names as needed
 
     // Possible section names based on the tabs in your website:
     // 'professional_summary', 'experience', 'skills', 'creative_persuits', 'education',
