@@ -21,7 +21,7 @@ function updateActiveTab(sectionName) {
 
 function attachCollapsibleEventListeners(sectionName) {
     // Define an array of sections that should have their collapsibles collapsed by default
-    const collapsibleSections = ['certifications', 'experience','ashrith_bookshelf']; // Add or remove section names as needed
+    const collapsibleSections = ['certifications', 'experience', 'ashrith_bookshelf']; // Add or remove section names as needed
 
     // Possible section names based on the tabs in your website:
     // 'professional_summary', 'experience', 'skills', 'creative_persuits', 'education',
@@ -34,11 +34,11 @@ function attachCollapsibleEventListeners(sectionName) {
             // Set initial state of collapsible content to 'none' (collapsed)
             const content = button.nextElementSibling;
             content.style.display = "none";
-            
+
             // Add click event listener to toggle collapse
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 this.classList.toggle('active-collapsible');
-                
+
                 // Toggle content visibility
                 if (content.style.display === "none" || content.style.display === "") {
                     content.style.display = "block";
@@ -52,11 +52,11 @@ function attachCollapsibleEventListeners(sectionName) {
         const collapsibleButtons = document.querySelectorAll('.collapsible');
         collapsibleButtons.forEach(button => {
             const content = button.nextElementSibling;
-            
+
             // Add click event listener to toggle collapse
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 this.classList.toggle('active-collapsible');
-                
+
                 // Toggle content visibility
                 if (content.style.display === "none" || content.style.display === "") {
                     content.style.display = "block";
