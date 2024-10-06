@@ -25,11 +25,11 @@ To clone and modify this repository, you'll need:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/ashrithssreddy/your-repo-name.git
+   git clone https://github.com/ashrithssreddy/ashrithssreddy.github.io.git
    ```
 2. **Navigate to the directory**:
    ```bash
-   cd your-repo-name
+   cd ashrithssreddy.github.io
    ```
 3. Open the `index.html` file in your web browser to view the website locally.
 
