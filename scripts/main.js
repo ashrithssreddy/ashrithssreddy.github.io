@@ -1,6 +1,6 @@
 function loadSection(sectionName) {
     // Update the URL using history.pushState() without reloading the page
-    history.pushState(null, null, `#${sectionName}`);
+    history.pushState(null, null, `${sectionName}`);
 
     // Fetch the section content dynamically
     fetch(`sections/${sectionName}.html`)
