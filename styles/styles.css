@@ -358,4 +358,15 @@ a:hover {
     font-size: 14px;
 }
 
+.business-focus {
+    font-weight: bold;
+    background-color: #f9f9f9; /* Light Gray */
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}
 
