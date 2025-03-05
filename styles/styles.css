@@ -344,3 +344,18 @@ a:hover {
 .footer a:hover {
     text-decoration: underline;
 }
+
+.tech-stack {
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #333;
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+
