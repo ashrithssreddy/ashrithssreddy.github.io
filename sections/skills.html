@@ -2,6 +2,7 @@
 
 <!-- Skill Cards First -->
 <div class="skills-container">
+    
     <div class="skill-card">
         <i class="fas fa-code skill-card-icon"></i>
         <div class="skill-card-content">
@@ -67,25 +68,119 @@
     </div>
 </div>
 
-<!-- Paragraph Next -->
+<br><br>
 <p>
     The expectations from the Data Science & Analytics profession have shifted significantly over time. I've evolved
-    with these industry demands by constantly updating my skillset to excel in various facets of data science and
-    analytics:
+    with these industry demands by constantly updating my skillset to excel in various facets of Data Science:
 </p>
 
-<!-- Bullet Points Last -->
-<ul>
-    <li><strong>2015 & 2016:</strong> Focused on building a strong foundation in Data & Analytics, mastering Programming
-        languages and essential tools.</li>
-    <li><strong>2017:</strong> Enhanced skills in Visualization and Design thinking to tell compelling stories and
-        effectively communicate business insights.</li>
-    <li><strong>2018 & 2019:</strong> Delved into Machine Learning applications to decipher patterns in data, leveraging
-        algorithms to unlock insights.</li>
-    <li><strong>2020 & 2021:</strong> Pursued rigorous academic training in Statistics to solidify a comprehensive
-        foundation for ever-evolving Machine Learning methods.</li>
-    <li><strong>2022 & 2023:</strong> Expanded into Data Engineering, taking ownership of end-to-end workflows and
-        productionizing data-driven industry recommendations.</li>
-    <li><strong>2024:</strong> Exploring Generative AI applications to accelerate business transformations and drive
-        innovative solutions.</li>
-</ul>
+<div class="timeline">
+    <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-laptop-code"></i></div>
+        <div class="timeline-content left">
+            <h3>2015 & 2016</h3>
+            <p>Focused on building a strong foundation in Data & Analytics, mastering programming languages and essential tools.</p>
+        </div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-chart-bar"></i></div>
+        <div class="timeline-content right">
+            <h3>2017</h3>
+            <p>Enhanced skills in Visualization and Design thinking to tell compelling stories and effectively communicate business insights.</p>
+        </div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-brain"></i></div>
+        <div class="timeline-content left">
+            <h3>2018 & 2019</h3>
+            <p>Delved into Machine Learning applications to decipher patterns in data, leveraging algorithms to unlock insights.</p>
+        </div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-calculator"></i></div>
+        <div class="timeline-content right">
+            <h3>2020 & 2021</h3>
+            <p>Pursued rigorous academic training in Statistics to solidify a comprehensive foundation for ever-evolving Machine Learning methods.</p>
+        </div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-database"></i></div>
+        <div class="timeline-content left">
+            <h3>2022 & 2023</h3>
+            <p>Expanded into Data Engineering, taking ownership of end-to-end workflows and productionizing data-driven industry recommendations.</p>
+        </div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-robot"></i></div>
+        <div class="timeline-content right">
+            <h3>2024</h3>
+            <p>Exploring Generative AI applications to accelerate business transformations and drive innovative solutions.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Timeline CSS -->
+<style>
+    .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px 0;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 2px;
+        background: #466273;
+        transform: translateX(-50%);
+    }
+
+    .timeline-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .timeline-icon {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        background: #333;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        z-index: 10;
+    }
+
+    .timeline-content {
+        width: 45%;
+        background: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .left {
+        text-align: right;
+    }
+
+    .right {
+        text-align: left;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-left: auto;
+    }
+</style>
