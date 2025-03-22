@@ -402,3 +402,24 @@ a:hover {
 .timeline p {
     font-size: inherit;
 }
+
+.contact-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.contact-section h3 {
+    flex-basis: 100%;
+    margin-bottom: 1px;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
