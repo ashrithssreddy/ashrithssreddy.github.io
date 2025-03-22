@@ -149,9 +149,10 @@ header {
 /* Background styles for education sections */
 .ms-statistics,
 .bs-electrical-engineering {
-    background-image: url('https://barefootcampusoutfitter.com/wp-content/uploads/2017/07/6023526804-scaled-scaled.jpg');
+    /* background-image: url('https://barefootcampusoutfitter.com/wp-content/uploads/2017/07/6023526804-scaled-scaled.jpg'); */
     background-size: cover;
     background-repeat: no-repeat;
+    background-color: #f3f8fb;
     background-position: center;
     color: #000;
     padding: 20px;
@@ -160,7 +161,7 @@ header {
 }
 
 .bs-electrical-engineering {
-    background-image: url('https://pulse.nitk.ac.in/wp-content/uploads/2020/06/NITK-Surathkal-logo.png');
+    /* background-image: url('https://pulse.nitk.ac.in/wp-content/uploads/2020/06/NITK-Surathkal-logo.png'); */
     background-size: cover;
     /* Cover the entire section */
     background-repeat: no-repeat;
@@ -414,7 +415,7 @@ a:hover {
 
 .contact-section h3 {
     flex-basis: 100%;
-    margin-bottom: 1px;
+    margin-bottom: 1ßpx;
 }
 
 .contact-card {
