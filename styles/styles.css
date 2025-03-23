@@ -80,11 +80,16 @@ header {
     margin: 5px;
     transition: background-color 0.3s;
     white-space: nowrap;
+    background-color: transparent; /* ✅ Transparent background */
 }
 
-.tab:hover,
-.active {
-    background-color: #466273;
+.tab:hover {
+    background-color: #505050; /* Optional subtle hover effect */
+}
+
+.tab.active {
+    background-color: #4a637d; /* ✅ Only selected tab has background */
+    color: white;
 }
 
 /* Collapsible Button Styles */
@@ -450,3 +455,31 @@ a:hover {
     color: #466273;
   }
   
+/* Tab Row Layout */
+.tab-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    background-color: transparent; /* ✅ Transparent background */
+}
+
+.tab:hover {
+    background-color: #505050; /* Optional subtle hover effect */
+}
+
+.tab.active {
+    background-color: #4a637d; /* ✅ Only selected tab has background */
+    color: white;
+}
