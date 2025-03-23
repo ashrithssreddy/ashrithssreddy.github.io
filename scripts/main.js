@@ -25,7 +25,8 @@ function updateActiveTab(sectionName) {
 
 function attachCollapsibleEventListeners(sectionName) {
     // Define an array of sections that should have their collapsibles collapsed by default
-    const collapsibleSections = ['certifications', 'experience', 'ash_bookshelf'];
+    const collapsibleSections = ['professional_experience','creative_persuits', 'ash_bookshelf'];
+    // do not collapse: ,'education'
 
     if (collapsibleSections.includes(sectionName)) {
         const collapsibleButtons = document.querySelectorAll('.collapsible');
