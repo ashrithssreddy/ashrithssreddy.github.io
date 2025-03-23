@@ -452,11 +452,11 @@ a:hover {
     align-items: center;
     gap: 0.5rem;
     font-size: 1rem;
-    color: #aebed8;
+    color: #000;
   }
   
   .contact-card a {
-    color: #aebed8;
+    color: #000;
     font-weight: 500;
     text-decoration: none;
   }
