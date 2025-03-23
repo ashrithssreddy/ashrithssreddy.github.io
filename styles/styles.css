@@ -404,18 +404,22 @@ a:hover {
     font-size: inherit;
 }
 
-.contact-section {
+/* .contact-section {
     display: flex;
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
     margin-bottom: 20px;
-}
+} */
 
-.contact-section h3 {
+/* .contact-section h3 {
     flex-basis: 100%;
     margin-bottom: 1ßpx;
+} */
+/* .contact-section h3 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .contact-card {
@@ -423,4 +427,41 @@ a:hover {
     align-items: center;
     gap: 8px;
     white-space: nowrap;
-}
+} */
+
+.contact-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  .contact-section {
+    margin-top: 1.5rem;
+  }
+  
+  .contact-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #aebed8;
+  }
+  
+  .contact-card a {
+    color: #aebed8;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .contact-card i {
+    font-size: 1.1rem;
+  }
+  
