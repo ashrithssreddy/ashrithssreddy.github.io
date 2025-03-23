@@ -404,11 +404,12 @@ a:hover {
     font-size: inherit;
 }
 
+/* Contact card container */
 .contact-card-box {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    padding: 10px 0;
+    gap: 16px;
+    padding: 20px;
     align-items: center;
     justify-content: flex-start;
     background: #ffffff;
@@ -417,28 +418,21 @@ a:hover {
     margin-top: 10px;
   }
   
+  /* Individual card (both links and text) */
   .contact-card {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 1rem;
     color: #333;
-    background-color: #f3f8fb;
     padding: 10px 14px;
     border-radius: 8px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #f9fbfd;
+    box-shadow: inset 0 0 0 1px #e1e7ed;
   }
   
-  .contact-card:hover {
-    background-color: #e6f0f5;
-  }
-  
-  .contact-card i {
-    min-width: 20px;
-    font-size: 1.1rem;
-    color: #466273;
-  }
-  
+  /* Hover effect only on interactive items (links) */
   .contact-card a {
     color: #466273;
     font-weight: 600;
@@ -447,5 +441,12 @@ a:hover {
   
   .contact-card a:hover {
     text-decoration: underline;
+  }
+  
+  /* Icon styling */
+  .contact-card i {
+    min-width: 20px;
+    font-size: 1.1rem;
+    color: #466273;
   }
   
