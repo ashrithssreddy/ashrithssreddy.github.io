@@ -3,14 +3,21 @@ function loadSection(sectionName) {
     history.pushState(null, null, `#${sectionName}`);
 
     // Fetch the section content dynamically
-    fetch(`sections/${sectionName}.html`)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('content-container').innerHTML = data;
-            updateActiveTab(sectionName);
-            attachCollapsibleEventListeners(sectionName); // Pass the section name
-        })
-        .catch(error => console.error('Error loading section:', error));
+    // Check if sectionName is a real anchor (e.g. ecomm-search) instead of a full section
+    if (document.getElementById(sectionName)) {
+        // It's just an anchor — don't fetch, just scroll
+        document.getElementById(sectionName).scrollIntoView({ behavior: 'smooth' });
+    } else {
+        // It's an actual section to fetch
+        fetch(`sections/${sectionName}.html`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('content-container').innerHTML = data;
+                updateActiveTab(sectionName);
+                attachCollapsibleEventListeners(sectionName);
+            })
+            .catch(error => console.error('Error loading section:', error));
+    }
 }
 
 function updateActiveTab(sectionName) {
