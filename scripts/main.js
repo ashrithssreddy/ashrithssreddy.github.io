@@ -1,31 +1,14 @@
-
 function loadSection(sectionName) {
     // Update the URL using history.pushState() without reloading the page
     history.pushState(null, null, `#${sectionName}`);
 
-    // Check if sectionName is a real anchor (e.g. ecomm-search) instead of a full section
-    const anchor = document.getElementById(sectionName);
-    if (anchor) {
-        // It's just an anchor — scroll and expand if collapsible
-        anchor.scrollIntoView({ behavior: 'smooth' });
-
-        const button = anchor.querySelector('.collapsible');
-        const content = anchor.querySelector('.collapsible-content');
-
-        if (button && content && content.style.display !== 'block') {
-            button.classList.add('active-collapsible');
-            content.style.display = 'block';
-        }
-        return;
-    }
-
-    // Else fetch section dynamically
+    // Fetch the section content dynamically
     fetch(`sections/${sectionName}.html`)
         .then(response => response.text())
         .then(data => {
             document.getElementById('content-container').innerHTML = data;
             updateActiveTab(sectionName);
-            attachCollapsibleEventListeners(sectionName);
+            attachCollapsibleEventListeners(sectionName); // Pass the section name
         })
         .catch(error => console.error('Error loading section:', error));
 }
@@ -42,22 +25,33 @@ function updateActiveTab(sectionName) {
 
 function attachCollapsibleEventListeners(sectionName) {
     // Define an array of sections that should have their collapsibles collapsed by default
-    const collapsibleSections = ['professional_experience', 'creative_persuits', 'ash_bookshelf'];
+    const collapsibleSections = ['professional_experience','creative_persuits', 'ash_bookshelf'];
+    // do not collapse: ,'education'
 
-    const collapsibleButtons = document.querySelectorAll('.collapsible');
-    collapsibleButtons.forEach(button => {
-        const content = button.nextElementSibling;
+    if (collapsibleSections.includes(sectionName)) {
+        const collapsibleButtons = document.querySelectorAll('.collapsible');
+        collapsibleButtons.forEach(button => {
+            const content = button.nextElementSibling;
+            content.style.display = "none"; // Set initial state of collapsible content to 'none'
 
-        if (collapsibleSections.includes(sectionName)) {
-            content.style.display = "none"; // Set initial state to 'none'
-        }
-
-        // Add click event listener to toggle collapse
-        button.addEventListener('click', function () {
-            this.classList.toggle('active-collapsible');
-            content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
+            // Add click event listener to toggle collapse
+            button.addEventListener('click', function () {
+                this.classList.toggle('active-collapsible');
+                content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
+            });
         });
-    });
+    } else {
+        const collapsibleButtons = document.querySelectorAll('.collapsible');
+        collapsibleButtons.forEach(button => {
+            const content = button.nextElementSibling;
+
+            // Add click event listener to toggle collapse
+            button.addEventListener('click', function () {
+                this.classList.toggle('active-collapsible');
+                content.style.display = (content.style.display === "none" || content.style.display === "") ? "block" : "none";
+            });
+        });
+    }
 }
 
 // Handle back and forward browser buttons
