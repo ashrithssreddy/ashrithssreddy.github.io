@@ -56,12 +56,12 @@ function attachCollapsibleEventListeners(sectionName) {
 
 // Handle back and forward browser buttons
 window.addEventListener('popstate', function() {
-    const sectionName = location.hash ? location.hash.substring(1) : 'professional_summary';
+    const sectionName = location.hash ? location.hash.substring(1) : 'about_me';
     loadSection(sectionName);
 });
 
 // Initial load based on the URL hash
 document.addEventListener('DOMContentLoaded', () => {
-    const sectionName = location.hash ? location.hash.substring(1) : 'professional_summary';
+    const sectionName = location.hash ? location.hash.substring(1) : 'about_me';
     loadSection(sectionName);
 });
