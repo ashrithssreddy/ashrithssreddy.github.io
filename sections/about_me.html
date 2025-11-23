@@ -9,31 +9,49 @@
         /* Snake Timeline Container */
         .timeline {
             position: relative;
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 40px 20px;
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 60px 40px;
         }
 
-        /* Timeline Row - horizontal rows for snake pattern */
+        /* Timeline Row - 3 items per row */
         .timeline-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             position: relative;
-            margin-bottom: 60px;
-            min-height: 200px;
+            margin-bottom: 0;
+            min-height: 320px;
+            gap: 40px;
+            padding: 0 60px;
         }
 
         /* Reverse direction for even rows (snake pattern) */
-        .timeline-row:nth-child(even) {
+        .timeline-row.reverse {
             flex-direction: row-reverse;
+        }
+
+        /* Curve item - single item at transition */
+        .timeline-curve {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 60px 0;
+            min-height: 250px;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .timeline-curve .timeline-item {
+            max-width: 320px;
         }
 
         /* Timeline item - positioned within rows */
         .timeline-item {
             position: relative;
             flex: 1;
-            max-width: 220px;
+            max-width: 320px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,162 +60,191 @@
 
         /* Date circle with icon */
         .timeline-node {
-            width: 50px;
-            height: 50px;
-            background: #466273;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #466273 0%, #5a7a8f 100%);
             border-radius: 50%;
-            border: 4px solid #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border: 6px solid #ffffff;
+            box-shadow: 0 8px 24px rgba(70, 98, 115, 0.35), 0 3px 8px rgba(0, 0, 0, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             z-index: 3;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .timeline-node:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            transform: scale(1.2) translateY(-5px);
+            box-shadow: 0 12px 36px rgba(70, 98, 115, 0.5), 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
         .timeline-node i {
             color: #ffffff;
-            font-size: 20px;
+            font-size: 28px;
         }
 
         /* Date label */
         .timeline-date {
-            font-size: 0.9em;
-            font-weight: bold;
+            font-size: 1.05em;
+            font-weight: 600;
             color: #466273;
-            margin-top: 8px;
+            margin-top: 14px;
+            margin-bottom: 10px;
             text-align: center;
             white-space: nowrap;
+            letter-spacing: 0.4px;
         }
 
         /* Content card */
         .content {
             background: #ffffff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e0e0e0;
-            margin-top: 15px;
+            padding: 24px;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e8ecef;
+            margin-top: 14px;
             width: 100%;
-            max-width: 220px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 320px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
 
         .content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15), 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-color: #d0d7de;
         }
 
         .content p {
-            margin: 0.5em 0;
-            font-size: 0.9em;
-            line-height: 1.5;
+            margin: 0.85em 0;
+            font-size: 0.98em;
+            line-height: 1.75;
+            color: #333;
         }
 
         .content p:first-child {
             margin-top: 0;
+            font-weight: 500;
         }
 
         .content p:last-child {
             margin-bottom: 0;
         }
 
-        /* Connecting line between items in a row */
+        .content a {
+            color: #466273;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .content a:hover {
+            border-bottom-color: #466273;
+        }
+
+        /* SVG for smooth curves */
+        .timeline-svg {
+            display: block;
+        }
+
+        /* Horizontal line for row items */
         .timeline-row::before {
             content: '';
             position: absolute;
-            top: 25px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(to right, #466273, #466273);
+            top: 35px;
+            left: 60px;
+            right: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #466273 0%, #5a7a8f 50%, #466273 100%);
             z-index: 1;
+            border-radius: 2px;
         }
 
-        /* Reverse direction for even rows */
-        .timeline-row:nth-child(even)::before {
-            background: linear-gradient(to left, #466273, #466273);
-        }
-
-        /* Curved connector between rows using SVG for smooth curves */
-        .timeline-row:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            bottom: -60px;
-            width: 3px;
-            height: 60px;
-            background: #466273;
-            z-index: 1;
-            border-radius: 0 0 30px 30px;
-        }
-
-        /* Position connector on right for odd rows, left for even rows */
-        .timeline-row:nth-child(odd):not(:last-child)::after {
-            right: 0;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 0;
-        }
-
-        .timeline-row:nth-child(even):not(:last-child)::after {
-            left: 0;
-            border-bottom-right-radius: 30px;
-            border-bottom-left-radius: 0;
+        .timeline-row.reverse::before {
+            background: linear-gradient(to left, #466273 0%, #5a7a8f 50%, #466273 100%);
         }
 
         /* Responsive adjustments */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
+            .timeline {
+                max-width: 1100px;
+                padding: 50px 30px;
+            }
+            
             .timeline-item {
-                max-width: 180px;
+                max-width: 240px;
             }
             
             .content {
-                max-width: 180px;
-                padding: 12px;
+                max-width: 240px;
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .timeline {
+                padding: 40px 20px;
+            }
+            
+            .timeline-row {
+                margin-bottom: 80px;
+                min-height: 260px;
+            }
+            
+            .timeline-item {
+                max-width: 200px;
+            }
+            
+            .content {
+                max-width: 200px;
+                padding: 16px;
+            }
+            
+            .content p {
+                font-size: 0.9em;
             }
         }
 
         @media (max-width: 768px) {
+            .timeline {
+                padding: 30px 15px;
+            }
+            
+            .timeline-svg {
+                display: none;
+            }
+            
             .timeline-row {
                 flex-direction: column !important;
                 align-items: center;
-                margin-bottom: 40px;
+                margin-bottom: 50px;
+                min-height: auto;
+                gap: 0;
+                padding: 0;
             }
 
             .timeline-row::before {
                 display: none;
             }
 
-            .timeline-row::after {
-                display: none;
+            .timeline-curve {
+                margin: 40px 0;
+                padding: 0 !important;
+                align-items: center !important;
             }
 
             .timeline-item {
                 max-width: 100%;
                 width: 100%;
-                margin-bottom: 30px;
+                margin-bottom: 40px;
             }
 
             .content {
                 max-width: 100%;
                 width: 100%;
-            }
-
-            /* Vertical connector for mobile */
-            .timeline-row:not(:last-child)::after {
-                display: block;
-                left: 50% !important;
-                right: auto !important;
-                transform: translateX(-50%);
-                bottom: -40px;
-                height: 40px;
-                border-radius: 0;
+                padding: 20px;
             }
         }
 
@@ -205,14 +252,31 @@
             .timeline {
                 padding: 20px 10px;
             }
+            
+            .timeline-row {
+                margin-bottom: 40px;
+            }
 
             .content {
-                padding: 12px;
-                font-size: 0.85em;
+                padding: 16px;
+            }
+            
+            .content p {
+                font-size: 0.9em;
+                line-height: 1.6;
             }
 
             .timeline-date {
-                font-size: 0.85em;
+                font-size: 0.95em;
+            }
+            
+            .timeline-node {
+                width: 55px;
+                height: 55px;
+            }
+            
+            .timeline-node i {
+                font-size: 22px;
             }
         }
     </style>
@@ -320,10 +384,21 @@
     </div>
 
     <!-- Timeline Section -->
-    <h2 style="text-align:center;">My Journey</h2>
+    <h2 style="text-align:center; margin-bottom: 50px;">My Journey</h2>
     <div class="timeline">
+        <!-- SVG Path Container for smooth curves -->
+        <svg class="timeline-svg" viewBox="0 0 1400 2000" preserveAspectRatio="none" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; overflow: visible;">
+            <!-- Curve from row 1 to row 2 (right side, smooth S-curve) -->
+            <path d="M 1200 320 Q 1300 420, 1200 520" stroke="#466273" stroke-width="4" fill="none" stroke-linecap="round" />
+            <!-- Curve from row 2 to row 3 (left side, smooth S-curve) -->
+            <path d="M 200 720 Q 100 820, 200 920" stroke="#466273" stroke-width="4" fill="none" stroke-linecap="round" />
+            <!-- Curve from row 3 to row 4 (right side, smooth S-curve) -->
+            <path d="M 1200 1120 Q 1300 1220, 1200 1320" stroke="#466273" stroke-width="4" fill="none" stroke-linecap="round" />
+            <!-- Curve from row 4 to final (left side, smooth S-curve) -->
+            <path d="M 200 1520 Q 100 1620, 200 1720" stroke="#466273" stroke-width="4" fill="none" stroke-linecap="round" />
+        </svg>
 
-        <!-- Row 1: Left to Right -->
+        <!-- Row 1: Left to Right (3 items) -->
         <div class="timeline-row">
             <div class="timeline-item">
                 <div class="timeline-node">
@@ -360,7 +435,10 @@
                         milestone in harnessing AI technology securely.</p>
                 </div>
             </div>
+        </div>
 
+        <!-- Curve Item 1 (right side) -->
+        <div class="timeline-curve" style="align-items: flex-end; padding-right: 60px;">
             <div class="timeline-item">
                 <div class="timeline-node">
                     <i class="fas fa-rocket"></i>
@@ -371,22 +449,10 @@
                         and built my first Generative AI product. Exploring new frontiers, one leap at a time! 🎯</p>
                 </div>
             </div>
-
-            <div class="timeline-item">
-                <div class="timeline-node">
-                    <i class="fas fa-city"></i>
-                </div>
-                <div class="timeline-date">2024</div>
-                <div class="content">
-                    <p>🌆 Moved to Austin! Immediately fell in love with its lively music scene, tech hubs, and a welcoming
-                        community. Remained a proud Texan, it's been a place of growth, creativity, and endless exploration.
-                        🎸</p>
-                </div>
-            </div>
         </div>
 
-        <!-- Row 2: Right to Left (snake pattern) -->
-        <div class="timeline-row">
+        <!-- Row 2: Right to Left (3 items) - Reversed -->
+        <div class="timeline-row reverse">
             <div class="timeline-item">
                 <div class="timeline-node">
                     <i class="fas fa-handshake"></i>
@@ -421,7 +487,10 @@
                         degree. </p>
                 </div>
             </div>
+        </div>
 
+        <!-- Curve Item 2 (left side) -->
+        <div class="timeline-curve" style="align-items: flex-start; padding-left: 60px;">
             <div class="timeline-item">
                 <div class="timeline-node">
                     <i class="fas fa-code"></i>
@@ -436,21 +505,9 @@
                             cause.</a></p>
                 </div>
             </div>
-
-            <div class="timeline-item">
-                <div class="timeline-node">
-                    <i class="fas fa-rocket"></i>
-                </div>
-                <div class="timeline-date">2017</div>
-                <div class="content">
-                    <p>🚀 Joined a startup during nasency that shattered industry records! This was the most productive
-                        phase of my life, learning to embrace uncertainty, adapt quickly, and push the boundaries of what I
-                        thought was possible. 💪</p>
-                </div>
-            </div>
         </div>
 
-        <!-- Row 3: Left to Right -->
+        <!-- Row 3: Left to Right (3 items) -->
         <div class="timeline-row">
             <div class="timeline-item">
                 <div class="timeline-node">
@@ -492,6 +549,36 @@
                         where I could truly excel and what I genuinely wanted to pursue.</p>
                 </div>
             </div>
+        </div>
+
+        <!-- Curve Item 3 (right side) -->
+        <div class="timeline-curve" style="align-items: flex-end; padding-right: 60px;">
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-city"></i>
+                </div>
+                <div class="timeline-date">2024</div>
+                <div class="content">
+                    <p>🌆 Moved to Austin! Immediately fell in love with its lively music scene, tech hubs, and a welcoming
+                        community. Remained a proud Texan, it's been a place of growth, creativity, and endless exploration.
+                        🎸</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 4: Right to Left (3 items) - Reversed -->
+        <div class="timeline-row reverse">
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="timeline-date">2017</div>
+                <div class="content">
+                    <p>🚀 Joined a startup during nasency that shattered industry records! This was the most productive
+                        phase of my life, learning to embrace uncertainty, adapt quickly, and push the boundaries of what I
+                        thought was possible. 💪</p>
+                </div>
+            </div>
 
             <div class="timeline-item">
                 <div class="timeline-node">
@@ -520,8 +607,8 @@
             </div>
         </div>
 
-        <!-- Row 4: Right to Left (snake pattern) -->
-        <div class="timeline-row">
+        <!-- Final Curve Item (left side) -->
+        <div class="timeline-curve" style="align-items: flex-start; padding-left: 60px;">
             <div class="timeline-item">
                 <div class="timeline-node">
                     <i class="fas fa-brain"></i>
