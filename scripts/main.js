@@ -9,8 +9,99 @@ function loadSection(sectionName) {
             document.getElementById('content-container').innerHTML = data;
             updateActiveTab(sectionName);
             attachCollapsibleEventListeners(sectionName); // Pass the section name
+            // Align snake icons if this is the about_me section
+            if (sectionName === 'about_me') {
+                // Wait for layout to settle, then align icons
+                setTimeout(() => {
+                    alignSnakeIcons();
+                    // Also set up resize listener
+                    window.removeEventListener('resize', alignSnakeIcons);
+                    window.addEventListener('resize', alignSnakeIcons);
+                }, 150);
+            }
         })
         .catch(error => console.error('Error loading section:', error));
+}
+
+function alignSnakeIcons() {
+    const container = document.querySelector('.snake-container');
+    if (!container) {
+        console.log('Container not found');
+        return;
+    }
+    
+    const svg = container.querySelector('.snake-svg');
+    const paths = container.querySelectorAll('.snake-path');
+    const icons = container.querySelectorAll('.snake-icon');
+    
+    if (!svg) {
+        console.log('SVG not found');
+        return;
+    }
+    if (paths.length === 0) {
+        console.log('No paths found');
+        return;
+    }
+    if (icons.length === 0) {
+        console.log('No icons found');
+        return;
+    }
+    
+    // Get container and SVG dimensions
+    const containerRect = container.getBoundingClientRect();
+    const svgRect = svg.getBoundingClientRect();
+    const viewBox = svg.viewBox.baseVal;
+    
+    // Icon radius in pixels
+    const iconRadius = 25;
+    const lineThickness = 4;
+    
+    // Calculate scale factors (SVG might be scaled to fit container)
+    const scaleX = svgRect.width / viewBox.width;
+    const scaleY = svgRect.height / viewBox.height;
+    
+    icons.forEach((icon, index) => {
+        const pathIndex = parseInt(icon.getAttribute('data-path'));
+        const position = parseFloat(icon.getAttribute('data-position'));
+        const path = paths[pathIndex];
+        
+        if (!path) {
+            console.log('Path not found for icon', index, 'pathIndex', pathIndex);
+            return;
+        }
+        
+        try {
+            // Get total length of path
+            const pathLength = path.getTotalLength();
+            
+            // Get point at position along path (in SVG viewBox coordinates)
+            const point = path.getPointAtLength(pathLength * position);
+            
+            // Convert SVG viewBox coordinates to percentage of container
+            // viewBox is 0 0 1200 600
+            const xPercent = (point.x / viewBox.width) * 100;
+            const yPercent = (point.y / viewBox.height) * 100;
+            
+            // For the first icon, position it on top of the line
+            let yOffset = 0;
+            if (index === 0) {
+                // Calculate offset to position icon on top of line
+                // Move up by (icon radius + half line thickness) in percentage
+                const offsetPixels = iconRadius + (lineThickness / 2);
+                yOffset = -(offsetPixels / containerRect.height) * 100;
+            }
+            
+            // Set position as percentage
+            icon.style.left = xPercent + '%';
+            icon.style.top = (yPercent + yOffset) + '%';
+            icon.style.display = 'flex';
+            icon.style.visibility = 'visible';
+            icon.style.opacity = '1';
+            
+        } catch (e) {
+            console.error('Error positioning icon', index, e);
+        }
+    });
 }
 
 function updateActiveTab(sectionName) {
