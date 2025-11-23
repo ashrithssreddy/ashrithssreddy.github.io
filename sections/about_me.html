@@ -1,7 +1,4 @@
-<!-- 
-Next Steps:
-Zig-zag timeline 
--->
+<!-- Snake/Zig-zag timeline implemented -->
 
 
 <head>
@@ -9,124 +6,213 @@ Zig-zag timeline
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Font Awesome for icons -->
     <style>
-        /* Timeline container */
+        /* Snake Timeline Container */
         .timeline {
             position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px 0;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px 20px;
         }
 
-        /* Timeline line */
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            background: #466273;
-            transform: translateX(-50%);
-        }
-
-        /* Timeline item */
-        .timeline-item {
+        /* Timeline Row - horizontal rows for snake pattern */
+        .timeline-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             position: relative;
-            width: 100%;
-            padding: 20px 0;
+            margin-bottom: 60px;
+            min-height: 200px;
         }
 
-        /* Alternating left and right alignment */
-        .timeline-item:nth-child(odd) {
-            flex-direction: row;
-        }
-
-        .timeline-item:nth-child(even) {
+        /* Reverse direction for even rows (snake pattern) */
+        .timeline-row:nth-child(even) {
             flex-direction: row-reverse;
+        }
+
+        /* Timeline item - positioned within rows */
+        .timeline-item {
+            position: relative;
+            flex: 1;
+            max-width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* Date circle with icon */
+        .timeline-node {
+            width: 50px;
+            height: 50px;
+            background: #466273;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 3;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .timeline-node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        .timeline-node i {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        /* Date label */
+        .timeline-date {
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #466273;
+            margin-top: 8px;
+            text-align: center;
+            white-space: nowrap;
         }
 
         /* Content card */
         .content {
             background: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 45%;
-            border: 1px solid #ddd;
-            position: relative;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            margin-top: 15px;
+            width: 100%;
+            max-width: 220px;
             transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
 
-        /* Hover effects for content cards */
         .content:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
         }
 
-        /* Circle for each date with icon */
-        .timeline-item::before {
+        .content p {
+            margin: 0.5em 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .content p:first-child {
+            margin-top: 0;
+        }
+
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Connecting line between items in a row */
+        .timeline-row::before {
             content: '';
             position: absolute;
-            left: 50%;
-            width: 40px;
-            height: 40px;
-            background: #466273;
-            border-radius: 50%;
-            border: 3px solid #ffffff;
-            transform: translateX(-50%);
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #466273, #466273);
             z-index: 1;
         }
 
-        /* Icon styling */
-        .timeline-item i {
+        /* Reverse direction for even rows */
+        .timeline-row:nth-child(even)::before {
+            background: linear-gradient(to left, #466273, #466273);
+        }
+
+        /* Curved connector between rows using SVG for smooth curves */
+        .timeline-row:not(:last-child)::after {
+            content: '';
             position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            color: #ffffff;
-            font-size: 18px;
-            z-index: 2;
+            bottom: -60px;
+            width: 3px;
+            height: 60px;
+            background: #466273;
+            z-index: 1;
+            border-radius: 0 0 30px 30px;
         }
 
-        /* Date styling, positioned next to the circle */
-        .timeline-date {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #466273;
-            position: absolute;
-            top: 0;
-            transform: translateY(-50%);
+        /* Position connector on right for odd rows, left for even rows */
+        .timeline-row:nth-child(odd):not(:last-child)::after {
+            right: 0;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 0;
         }
 
-        /* Position the date next to the circle */
-        .timeline-item:nth-child(odd) .timeline-date {
-            right: 52%;
-            /* Move to the left side */
-        }
-
-        .timeline-item:nth-child(even) .timeline-date {
-            left: 52%;
-            /* Move to the right side */
+        .timeline-row:nth-child(even):not(:last-child)::after {
+            left: 0;
+            border-bottom-right-radius: 30px;
+            border-bottom-left-radius: 0;
         }
 
         /* Responsive adjustments */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .timeline-item {
-                flex-direction: column;
+                max-width: 180px;
+            }
+            
+            .content {
+                max-width: 180px;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-row {
+                flex-direction: column !important;
+                align-items: center;
+                margin-bottom: 40px;
             }
 
-            .timeline-item .content {
-                width: 80%;
-                margin: 20px auto;
+            .timeline-row::before {
+                display: none;
             }
 
-            /* Adjust date position for small screens */
-            .timeline-item .timeline-date {
-                left: 50%;
+            .timeline-row::after {
+                display: none;
+            }
+
+            .timeline-item {
+                max-width: 100%;
+                width: 100%;
+                margin-bottom: 30px;
+            }
+
+            .content {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            /* Vertical connector for mobile */
+            .timeline-row:not(:last-child)::after {
+                display: block;
+                left: 50% !important;
+                right: auto !important;
                 transform: translateX(-50%);
+                bottom: -40px;
+                height: 40px;
+                border-radius: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline {
+                padding: 20px 10px;
+            }
+
+            .content {
+                padding: 12px;
+                font-size: 0.85em;
+            }
+
+            .timeline-date {
+                font-size: 0.85em;
             }
         }
     </style>
@@ -237,268 +323,217 @@ Zig-zag timeline
     <h2 style="text-align:center;">My Journey</h2>
     <div class="timeline">
 
-<!-- Timeline Item -->
-<!-- <div class="timeline-item">
-    <i class="fas fa-passport"></i>
-    <div class="timeline-date">2027 (Planned)</div>
-    <div class="content">
-        <p>🌍 Planning to obtain citizenship in St. Kitts and Nevis in 2027, expanding my freedom to travel and explore
-            the world with ease. This new chapter will enrich my journey as a global citizen, grounded in the values and
-            traditions I carry with me..</p>
-    </div>
-</div> -->
+        <!-- Row 1: Left to Right -->
+        <div class="timeline-row">
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <div class="timeline-date">2025 Mar (Planned)</div>
+                <div class="content">
+                    <p>📝 <strong>Executing My First Smart Contract</strong> <em>(Planned)</em></p>
+                    <p>Set to execute my first smart contract, marking a new milestone in my journey within the world of
+                        decentralized technology.</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<!-- <div class="timeline-item">
-    <i class="fas fa-book"></i>
-    <div class="timeline-date">2026 (Planned)</div>
-    <div class="content">
-        <p>📖 <strong>Authoring a Book on Demographic Drift</strong> <em>(Planned)</em></p>
-        <p>Set to begin drafting my first book, exploring global demographic shifts. This planned project will examine
-            population trends, economic impacts, and societal changes, aiming to provide readers with a comprehensive
-            view of how these shifts shape the future.</p>
-    </div>
-</div>
- -->
-<!-- Timeline Item -->
-<!-- <div class="timeline-item">
-    <i class="fas fa-pen-nib"></i>
-    <div class="timeline-date">2026 (Planned)</div>
-    <div class="content">
-        <p>📚 <strong>Bringing Bookshelf to Life on Substack</strong> <em>(Planned)</em></p>
-        <p>In 2025, I'll be revisiting the books that shaped my perspectives on technology, economics, and society. My
-            aim? To create concise, insightful summaries that don’t just inform but inspire readers. These aren’t just
-            reviews – each piece will delve into core themes, lessons, and ideas, weaving connections with real-world
-            applications. Follow my journey on <a href="https://ashrithssreddy.substack.com/"
-                target="_blank">Substack</a> as I share these curated reflections.</p>
-    </div>
-</div>
-         -->
-<!-- Timeline Item -->
-<!-- <div class="timeline-item">
-    <i class="fas fa-network-wired"></i> 
-    <div class="timeline-date">2025 Dec (Planned)</div>
-    <div class="content">
-        <p>🌐 <strong>Deepening My Understanding of Web3</strong> <em>(Planned)</em></p>
-        <p>Concluding the year with a deep dive into Web3 concepts. This planned learning journey will focus on
-            decentralized applications, blockchain, and the future of a decentralized internet.</p>
-    </div>
-</div>
- -->
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-file-contract"></i>
-    <div class="timeline-date">2025 Mar (Planned)</div>
-    <div class="content">
-        <p>📝 <strong>Executing My First Smart Contract</strong> <em>(Planned)</em></p>
-        <p>Set to execute my first smart contract, marking a new milestone in my journey within the world of
-            decentralized technology.</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="timeline-date">2025 Jan-Feb (Planned)</div>
+                <div class="content">
+                    <p>🔐 <strong>Building Stronger Online Privacy Practices</strong> <em>(Planned)</em></p>
+                    <p>Focused on enhancing my online privacy practices. This planned initiative aims to strengthen my security for
+                        online transactions and reduce my digital footprint as I continue to prioritize privacy.</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-shield-alt"></i>
-    <div class="timeline-date">2025 Jan-Feb (Planned)</div>
-    <div class="content">
-        <p>🔐 <strong>Building Stronger Online Privacy Practices</strong> <em>(Planned)</em></p>
-        <p>Focused on enhancing my online privacy practices. This planned initiative aims to strengthen my security for
-            online transactions and reduce my digital footprint as I continue to prioritize privacy.</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-server"></i>
+                </div>
+                <div class="timeline-date">2024 Nov</div>
+                <div class="content">
+                    <p>🤖 <strong>Brought AI Capabilities Offline</strong></p>
+                    <p>Deployed a local AI model, prioritizing privacy, offline usability, and tailored applications. A key
+                        milestone in harnessing AI technology securely.</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<!-- <div class="timeline-item">
-    <i class="fas fa-map-marker-alt"></i>
-    <div class="timeline-date">2024 Dec</div>
-    <div class="content">
-        <p>📍 <strong>Planning to Move Out of Austin</strong></p>
-        <p>Exploring new opportunities and horizons as I prepare to leave Austin. Reflecting on the growth, connections,
-            and memories made during my time in this vibrant city while looking forward to the next chapter.</p>
-    </div>
-</div>
- -->
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-server"></i>
-    <div class="timeline-date">2024 Nov</div>
-    <div class="content">
-        <p>🤖 <strong>Brought AI Capabilities Offline</strong></p>
-        <p>Deployed a local AI model, prioritizing privacy, offline usability, and tailored applications. A key
-            milestone in harnessing AI technology securely.</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="timeline-date">2024</div>
+                <div class="content">
+                    <p>🚀 A year of firsts: made my first Bitcoin transaction, bought my first augmented reality hardware,
+                        and built my first Generative AI product. Exploring new frontiers, one leap at a time! 🎯</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-rocket"></i>
-    <div class="timeline-date">2024</div>
-    <div class="content">
-        <p>🚀 A year of firsts: made my first Bitcoin transaction, bought my first augmented reality hardware,
-            and built my first Generative AI product. Exploring new frontiers, one leap at a time! 🎯</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-city"></i>
+                </div>
+                <div class="timeline-date">2024</div>
+                <div class="content">
+                    <p>🌆 Moved to Austin! Immediately fell in love with its lively music scene, tech hubs, and a welcoming
+                        community. Remained a proud Texan, it's been a place of growth, creativity, and endless exploration.
+                        🎸</p>
+                </div>
+            </div>
+        </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-city"></i>
-    <div class="timeline-date">2024</div>
-    <div class="content">
-        <p>🌆 Moved to Austin! Immediately fell in love with its lively music scene, tech hubs, and a welcoming
-            community. Remained a proud Texan, it’s been a place of growth, creativity, and endless exploration.
-            🎸</p>
-    </div>
-</div>
+        <!-- Row 2: Right to Left (snake pattern) -->
+        <div class="timeline-row">
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <div class="timeline-date">2022</div>
+                <div class="content">
+                    <p>🤝 Rehired by TheMathCompany to take on a pivotal role in a new geography, reflecting the trust and
+                        confidence in each other established during previous assignments. 🙌</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<!-- <div class="timeline-item">
-    <i class="fas fa-users"></i>
-    <div class="timeline-date">2023</div>
-    <div class="content">
-        <p>👥 Successfully led my first team, solving complex business problems and making product decisions
-            that impacted millions of consumers. A significant step in showcasing my leadership skills! 💡</p>
-    </div>
-</div>
- -->
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-handshake"></i>
-    <div class="timeline-date">2022</div>
-    <div class="content">
-        <p>🤝 Rehired by TheMathCompany to take on a pivotal role in a new geography, reflecting the trust and
-            confidence in each other established during previous assignments. 🙌</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <div class="timeline-date">2021</div>
+                <div class="content">
+                    <p>🌎 Moved to America, with Florida being the natural destination for a beach lover! 🌊 Embraced new
+                        cultural experiences, developed a deep appreciation for personal freedoms, and reignited my love for
+                        the beach lifestyle. 🏄‍♂️</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-plane"></i>
-    <div class="timeline-date">2021</div>
-    <div class="content">
-        <p>🌎 Moved to America, with Florida being the natural destination for a beach lover! 🌊 Embraced new
-            cultural experiences, developed a deep appreciation for personal freedoms, and reignited my love for
-            the beach lifestyle. 🏄‍♂️</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div class="timeline-date">2020</div>
+                <div class="content">
+                    <p>📈 While I was skilled in programming & business, I realized I needed to plug the math gap to
+                        become the best data scientist. 🎓 Amidst the uncertainty of the COVID era, I started my master's
+                        degree. </p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-university"></i>
-    <div class="timeline-date">2020</div>
-    <div class="content">
-        <p>📈 While I was skilled in programming & business, I realized I needed to plug the math gap to
-            become the best data scientist. 🎓 Amidst the uncertainty of the COVID era, I started my master's
-            degree. </p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="timeline-date">2018</div>
+                <div class="content">
+                    <p>🖥️ Wrote my first <a href="https://stackoverflow.com/a/46904676/6323610" target="_blank">Stack Overflow
+                            answer</a>, and stumbled upon the Free Software Foundation. Their mission of free and open-source
+                        software deeply inspired me, turning a simple answer into the start of my journey as an advocate for open
+                        collaboration in the tech community.</p>
+                    <p>If you too feel inspired, consider <a href="https://my.fsf.org/donate" target="_blank">supporting their
+                            cause.</a></p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-code"></i>
-    <div class="timeline-date">2018</div>
-    <div class="content">
-        <p>🖥️ Wrote my first <a href="https://stackoverflow.com/a/46904676/6323610" target="_blank">Stack Overflow
-                answer</a>, and stumbled upon the Free Software Foundation. Their mission of free and open-source
-            software deeply inspired me, turning a simple answer into the start of my journey as an advocate for open
-            collaboration in the tech community.</p>
-        <p>If you too feel inspired, consider <a href="https://my.fsf.org/donate" target="_blank">supporting their
-                cause.</a></p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="timeline-date">2017</div>
+                <div class="content">
+                    <p>🚀 Joined a startup during nasency that shattered industry records! This was the most productive
+                        phase of my life, learning to embrace uncertainty, adapt quickly, and push the boundaries of what I
+                        thought was possible. 💪</p>
+                </div>
+            </div>
+        </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-rocket"></i>
-    <div class="timeline-date">2017</div>
-    <div class="content">
-        <p>🚀 Joined a startup during nasency that shattered industry records! This was the most productive
-            phase of my life, learning to embrace uncertainty, adapt quickly, and push the boundaries of what I
-            thought was possible. 💪</p>
-    </div>
-</div>
+        <!-- Row 3: Left to Right -->
+        <div class="timeline-row">
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="timeline-date">2015</div>
+                <div class="content">
+                    <p>💼 Received my first paycheck! The highlight? Seeing my work mentioned in the <a
+                            href="https://www.wsj.com/articles/data-helps-espn-customize-ads-for-sports-fans-leanings-1463482861">Wall
+                            Street Journal</a> and mentoring hundreds of folks to become better programmers. That really
+                        fueled my motivation! 🚀</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-briefcase"></i>
-    <div class="timeline-date">2015</div>
-    <div class="content">
-        <p>💼 Received my first paycheck! The highlight? Seeing my work mentioned in the <a
-                href="https://www.wsj.com/articles/data-helps-espn-customize-ads-for-sports-fans-leanings-1463482861">Wall
-                Street Journal</a> and mentoring hundreds of folks to become better programmers. That really
-            fueled my motivation! 🚀</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-film"></i>
+                </div>
+                <div class="timeline-date">2013</div>
+                <div class="content">
+                    <p>🎥 First encountered the periphery of Analytics through coursework and watched <a
+                            href="https://www.imdb.com/title/tt1210166/" target="_blank"><strong>Moneyball</strong></a>
+                        (starring Brad Pitt), which fueled my passion for information theory, programming, and its
+                        application in the real world. 📊</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-film"></i>
-    <div class="timeline-date">2013</div>
-    <div class="content">
-        <p>🎥 First encountered the periphery of Analytics through coursework and watched <a
-                href="https://www.imdb.com/title/tt1210166/" target="_blank"><strong>Moneyball</strong></a>
-            (starring Brad Pitt), which fueled my passion for information theory, programming, and its
-            application in the real world. 📊</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="timeline-date">2011</div>
+                <div class="content">
+                    <p>🎓 Started my B.S. in Electrical Engineering, living in a dorm room right on the <a
+                            href="https://www.google.com/maps/place/Surathkal+Beach/@12.9913913,74.7905324,3a,75y,93.54h,102.27t/data=!3m8!1e1!3m6!1sAF1QipNCPkbnmlyLgGxamHgh8ysFCPyOmABWY0tCtlJx!2e10!3e11!6s%2F%2Flh5.ggpht.com%2Fp%2FAF1QipNCPkbnmlyLgGxamHgh8ysFCPyOmABWY0tCtlJx%3Dw900-h600-k-no-pi-12.26959666327879-ya24.552020028978433-ro0-fo100!7i4096!8i2048!4m9!3m8!1s0x3ba3520fa7fdc4c1:0x71aac68d000704fa!8m2!3d13.0052601!4d74.7891652!10e5!14m1!1BCgIgARICCAI!16s%2Fg%2F11gbffxvsx?coh=205410&entry=ttu&g_ep=EgoyMDI0MDkzMC4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank">tropical beach</a>! 🏖️</p>
+                    <p>🌊 The stillness and wrath of vast mighty ocean coupled with 1st major setback in this competitive
+                        school humbled me down. It was a turning point where I reflected on my path, looking forward to
+                        where I could truly excel and what I genuinely wanted to pursue.</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-graduation-cap"></i>
-    <div class="timeline-date">2011</div>
-    <div class="content">
-        <p>🎓 Started my B.S. in Electrical Engineering, living in a dorm room right on the <a
-                href="https://www.google.com/maps/place/Surathkal+Beach/@12.9913913,74.7905324,3a,75y,93.54h,102.27t/data=!3m8!1e1!3m6!1sAF1QipNCPkbnmlyLgGxamHgh8ysFCPyOmABWY0tCtlJx!2e10!3e11!6s%2F%2Flh5.ggpht.com%2Fp%2FAF1QipNCPkbnmlyLgGxamHgh8ysFCPyOmABWY0tCtlJx%3Dw900-h600-k-no-pi-12.26959666327879-ya24.552020028978433-ro0-fo100!7i4096!8i2048!4m9!3m8!1s0x3ba3520fa7fdc4c1:0x71aac68d000704fa!8m2!3d13.0052601!4d74.7891652!10e5!14m1!1BCgIgARICCAI!16s%2Fg%2F11gbffxvsx?coh=205410&entry=ttu&g_ep=EgoyMDI0MDkzMC4wIKXMDSoASAFQAw%3D%3D"
-                target="_blank">tropical beach</a>! 🏖️</p>
-        <p>🌊 The stillness and wrath of vast mighty ocean coupled with 1st major setback in this competitive
-            school humbled me down. It was a turning point where I reflected on my path, looking forward to
-            where I could truly excel and what I genuinely wanted to pursue.</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <div class="timeline-date">2008</div>
+                <div class="content">
+                    <p>✨ Moved to Bangalore (India) for better education. Wrote my first line of code here in Asia's Silicon
+                        Valley, sparking a lifelong fascination with the limitless power of computing. 💻</p>
+                </div>
+            </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-laptop-code"></i>
-    <div class="timeline-date">2008</div>
-    <div class="content">
-        <p>✨ Moved to Bangalore (India) for better education. Wrote my first line of code here in Asia's Silicon
-            Valley, sparking a lifelong fascination with the limitless power of computing. 💻</p>
-    </div>
-</div>
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="timeline-date">2009</div>
+                <div class="content">
+                    <p>✉️ Sent my first email.</p>
+                    <p>Fun Fact: 14-year-old me found a typographical error in chemistry textbook, complained to the
+                        national education board on Quality Control, experimenting with new communication technology called
+                        electronic mail. My quest for accuracy began very early!</p>
+                    <p>Not-so-fun Fact: I eventually forgot the email password, so I guess I'll never know if they ever
+                        responded!</p>
+                </div>
+            </div>
+        </div>
 
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-envelope"></i>
-    <div class="timeline-date">2009</div>
-    <div class="content">
-        <p>✉️ Sent my first email.</p>
-        <!-- 14-year old me spotted a typo in my chemistry textbook and complained to the national education board via email. My quest for accuracy began early! -->
-        <p>Fun Fact: 14-year-old me found a typographical error in chemistry textbook, complained to the
-            national education board on Quality Control, experimenting with new communication technology called
-            electronic mail. My quest for accuracy began very early!</p>
-        <p>Not-so-fun Fact: I eventually forgot the email password, so I guess I’ll never know if they ever
-            responded!</p>
-    </div>
-</div>
-
-<!-- Timeline Item -->
-<div class="timeline-item">
-    <i class="fas fa-brain"></i>
-    <div class="timeline-date">2007</div>
-    <div class="content">
-        <p>🌍 Set foot outside my home country for the first time, traveling to Hong Kong for an international
-            Mental Arithmetic competition. Securing 3rd place in Asia made me discover my natural flair for
-            numbers.</p>
-    </div>
-</div>
-
-<!-- Timeline Item -->
-<!-- <div class="timeline-item">
-    <i class="fas fa-baby"></i>
-    <div class="timeline-date">1994</div>
-    <div class="content">
-        <p>🎉 Born, yay! :)</p>
-    </div>
-</div> -->
+        <!-- Row 4: Right to Left (snake pattern) -->
+        <div class="timeline-row">
+            <div class="timeline-item">
+                <div class="timeline-node">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="timeline-date">2007</div>
+                <div class="content">
+                    <p>🌍 Set foot outside my home country for the first time, traveling to Hong Kong for an international
+                        Mental Arithmetic competition. Securing 3rd place in Asia made me discover my natural flair for
+                        numbers.</p>
+                </div>
+            </div>
+        </div>
 
 
 
