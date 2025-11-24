@@ -26,15 +26,108 @@ function loadSection(sectionName) {
         .catch(error => console.error('Error loading section:', error));
 }
 
+function generateSnakePath() {
+    const container = document.querySelector('.snake-container');
+    if (!container) return;
+    
+    const svg = container.querySelector('.snake-svg');
+    const icons = Array.from(container.querySelectorAll('.snake-icon'));
+    const pathsGroup = document.getElementById('snake-paths');
+    
+    if (!svg || !pathsGroup || icons.length === 0) return [];
+    
+    // Clear existing paths
+    pathsGroup.innerHTML = '';
+    
+    // Configuration: 3 icons per row, 1 icon per curve
+    const iconsPerRow = 3;
+    const iconsPerCurve = 1;
+    const totalIcons = icons.length;
+    
+    // Calculate how many rows and curves we need
+    // Pattern: row(3) -> curve(1) -> row(3) -> curve(1) -> ...
+    const itemsPerCycle = iconsPerRow + iconsPerCurve; // 4 items
+    
+    let numRows = 0;
+    let numCurves = 0;
+    let remainingIcons = totalIcons;
+    
+    // Distribute icons: 3 per row, 1 per curve
+    while (remainingIcons > 0) {
+        if (remainingIcons >= iconsPerRow) {
+            numRows++;
+            remainingIcons -= iconsPerRow;
+            // Add curve if there are more icons coming
+            if (remainingIcons > 0) {
+                numCurves++;
+                remainingIcons -= iconsPerCurve;
+            }
+        } else {
+            // Last row with fewer than 3 icons
+            numRows++;
+            remainingIcons = 0;
+        }
+    }
+    
+    // SVG viewBox dimensions
+    const viewBoxWidth = 1200;
+    const viewBoxHeight = 600;
+    const marginX = 100;
+    const marginY = 50;
+    const totalRows = numRows;
+    const rowSpacing = totalRows > 1 ? (viewBoxHeight - 2 * marginY) / (totalRows - 1) : 0;
+    const rowWidth = viewBoxWidth - 2 * marginX;
+    
+    // Generate paths
+    const paths = [];
+    let currentY = marginY;
+    let isLeftToRight = true;
+    
+    for (let i = 0; i < numRows; i++) {
+        const startX = isLeftToRight ? marginX : marginX + rowWidth;
+        const endX = isLeftToRight ? marginX + rowWidth : marginX;
+        
+        // Horizontal row
+        const rowPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        rowPath.setAttribute('class', 'snake-path');
+        rowPath.setAttribute('d', `M ${startX} ${currentY} L ${endX} ${currentY}`);
+        pathsGroup.appendChild(rowPath);
+        paths.push(rowPath);
+        
+        // Add curve if there's a next row
+        if (i < numRows - 1) {
+            const nextY = currentY + rowSpacing;
+            const curveX = isLeftToRight ? marginX + rowWidth : marginX;
+            const controlX = isLeftToRight ? viewBoxWidth : 0;
+            const controlY = currentY + (rowSpacing / 2);
+            
+            const curvePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            curvePath.setAttribute('class', 'snake-path');
+            curvePath.setAttribute('d', `M ${curveX} ${currentY} Q ${controlX} ${controlY}, ${curveX} ${nextY}`);
+            pathsGroup.appendChild(curvePath);
+            paths.push(curvePath);
+            
+            currentY = nextY;
+            isLeftToRight = !isLeftToRight;
+        }
+    }
+    
+    return paths;
+}
+
 function alignSnakeIcons() {
     const container = document.querySelector('.snake-container');
     if (!container) return;
     
     const svg = container.querySelector('.snake-svg');
-    const paths = Array.from(container.querySelectorAll('.snake-path'));
     const icons = Array.from(container.querySelectorAll('.snake-icon'));
     
-    if (!svg || paths.length === 0 || icons.length === 0) return;
+    if (!svg || icons.length === 0) return;
+    
+    // Generate snake path dynamically based on number of icons
+    const paths = generateSnakePath();
+    
+    if (!paths || paths.length === 0) return;
     
     // Wait for layout to be ready
     const containerRect = container.getBoundingClientRect();

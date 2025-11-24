@@ -167,33 +167,8 @@
     <h2 style="text-align:center; margin-bottom: 50px;">My Journey</h2>
     <div class="snake-container">
         <svg class="snake-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
-            <!-- Snake path: horizontal rows with smooth S-curves between them -->
-            <!-- Row 1: Left to Right -->
-            <path class="snake-path" d="M 100 100 L 1100 100" />
-            
-            <!-- Curve 1: Right side down -->
-            <path class="snake-path" d="M 1100 100 Q 1200 150, 1100 200" />
-            
-            <!-- Row 2: Right to Left -->
-            <path class="snake-path" d="M 1100 200 L 100 200" />
-            
-            <!-- Curve 2: Left side down -->
-            <path class="snake-path" d="M 100 200 Q 0 250, 100 300" />
-            
-            <!-- Row 3: Left to Right -->
-            <path class="snake-path" d="M 100 300 L 1100 300" />
-            
-            <!-- Curve 3: Right side down -->
-            <path class="snake-path" d="M 1100 300 Q 1200 350, 1100 400" />
-            
-            <!-- Row 4: Right to Left -->
-            <path class="snake-path" d="M 1100 400 L 100 400" />
-            
-            <!-- Curve 4: Left side down -->
-            <path class="snake-path" d="M 100 400 Q 0 450, 100 500" />
-            
-            <!-- Final row: Left to Right -->
-            <path class="snake-path" d="M 100 500 L 1100 500" />
+            <!-- Snake path will be generated dynamically -->
+            <g id="snake-paths"></g>
         </svg>
         
         <!-- Icons positioned along the snake path - automatically distributed -->
