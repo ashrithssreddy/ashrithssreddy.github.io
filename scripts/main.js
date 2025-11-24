@@ -217,6 +217,36 @@ function alignSnakeIcons() {
             icon.style.display = 'flex';
             icon.style.visibility = 'visible';
             
+            // Position box based on which row this icon is in
+            const box = icon.querySelector('.snake-icon-box');
+            if (box) {
+                // Determine row direction: rows alternate left-to-right and right-to-left
+                // Pattern: 3 icons per row, 1 icon per curve
+                const iconsPerRow = 3;
+                const iconsPerCurve = 1;
+                const itemsPerCycle = iconsPerRow + iconsPerCurve; // 4
+                
+                // Calculate which cycle and position within cycle
+                const cycleIndex = Math.floor(index / itemsPerCycle);
+                const positionInCycle = index % itemsPerCycle;
+                
+                // Determine if this is a row icon or curve icon
+                const isCurveIcon = positionInCycle === iconsPerRow; // position 3 (0-indexed)
+                
+                // Determine row direction: even cycles (0, 2, 4...) go left→right, odd cycles go right→left
+                const isLeftToRightRow = cycleIndex % 2 === 0;
+                
+                if (isCurveIcon) {
+                    // Curve icons: position opposite to the next row direction
+                    box.style.left = isLeftToRightRow ? 'auto' : '60px';
+                    box.style.right = isLeftToRightRow ? '60px' : 'auto';
+                } else {
+                    // Row icons: position based on row direction
+                    box.style.left = isLeftToRightRow ? '60px' : 'auto';
+                    box.style.right = isLeftToRightRow ? 'auto' : '60px';
+                }
+            }
+            
         } catch (e) {
             console.error('Error positioning icon', index, e);
         }
