@@ -12,14 +12,15 @@
             padding: 60px 40px;
             min-height: 600px;
             width: 100%;
+            box-sizing: border-box;
         }
 
         .snake-svg {
-            width: 100%;
-            height: 100%;
+            width: calc(100% - 80px);
+            height: calc(100% - 120px);
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 60px;
+            left: 40px;
             overflow: visible;
         }
 
@@ -195,68 +196,53 @@
             <path class="snake-path" d="M 100 500 L 1100 500" />
         </svg>
         
-        <!-- Icons positioned along the snake path -->
-        <!-- Row 1: Left to Right (3 icons) -->
-        <div class="snake-icon" data-path="0" data-position="0.25">
+        <!-- Icons positioned along the snake path - automatically distributed -->
+        <div class="snake-icon">
             <i class="fas fa-file-contract"></i>
         </div>
-        <div class="snake-icon" data-path="0" data-position="0.5">
+        <div class="snake-icon">
             <i class="fas fa-shield-alt"></i>
         </div>
-        <div class="snake-icon" data-path="0" data-position="0.75">
+        <div class="snake-icon">
             <i class="fas fa-server"></i>
         </div>
-        
-        <!-- Curve 1 icon (right side) -->
-        <div class="snake-icon" data-path="1" data-position="0.5">
+        <div class="snake-icon">
             <i class="fas fa-rocket"></i>
         </div>
-        
-        <!-- Row 2: Right to Left (3 icons) -->
-        <div class="snake-icon" data-path="2" data-position="0.25">
+        <div class="snake-icon">
             <i class="fas fa-handshake"></i>
         </div>
-        <div class="snake-icon" data-path="2" data-position="0.5">
+        <div class="snake-icon">
             <i class="fas fa-plane"></i>
         </div>
-        <div class="snake-icon" data-path="2" data-position="0.75">
+        <div class="snake-icon">
             <i class="fas fa-university"></i>
         </div>
-        
-        <!-- Curve 2 icon (left side) -->
-        <div class="snake-icon" data-path="3" data-position="0.5">
+        <div class="snake-icon">
             <i class="fas fa-code"></i>
         </div>
-        
-        <!-- Row 3: Left to Right (3 icons) -->
-        <div class="snake-icon" data-path="4" data-position="0.25">
+        <div class="snake-icon">
             <i class="fas fa-briefcase"></i>
         </div>
-        <div class="snake-icon" data-path="4" data-position="0.5">
+        <div class="snake-icon">
             <i class="fas fa-film"></i>
         </div>
-        <div class="snake-icon" data-path="4" data-position="0.75">
+        <div class="snake-icon">
             <i class="fas fa-graduation-cap"></i>
         </div>
-        
-        <!-- Curve 3 icon (right side) -->
-        <div class="snake-icon" data-path="5" data-position="0.5">
+        <div class="snake-icon">
             <i class="fas fa-city"></i>
         </div>
-        
-        <!-- Row 4: Right to Left (3 icons) -->
-        <div class="snake-icon" data-path="6" data-position="0.25">
+        <div class="snake-icon">
             <i class="fas fa-rocket"></i>
         </div>
-        <div class="snake-icon" data-path="6" data-position="0.5">
+        <div class="snake-icon">
             <i class="fas fa-laptop-code"></i>
         </div>
-        <div class="snake-icon" data-path="6" data-position="0.75">
+        <div class="snake-icon">
             <i class="fas fa-envelope"></i>
         </div>
-        
-        <!-- Final curve icon (left side) -->
-        <div class="snake-icon" data-path="7" data-position="0.5">
+        <div class="snake-icon">
             <i class="fas fa-brain"></i>
         </div>
     </div>

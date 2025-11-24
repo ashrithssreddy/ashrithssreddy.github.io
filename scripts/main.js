@@ -11,13 +11,16 @@ function loadSection(sectionName) {
             attachCollapsibleEventListeners(sectionName); // Pass the section name
             // Align snake icons if this is the about_me section
             if (sectionName === 'about_me') {
-                // Wait for layout to settle, then align icons
-                setTimeout(() => {
-                    alignSnakeIcons();
-                    // Also set up resize listener
-                    window.removeEventListener('resize', alignSnakeIcons);
-                    window.addEventListener('resize', alignSnakeIcons);
-                }, 150);
+                // Wait for layout to settle, then align icons multiple times to ensure it works
+                setTimeout(alignSnakeIcons, 50);
+                setTimeout(alignSnakeIcons, 200);
+                setTimeout(alignSnakeIcons, 500);
+                // Also set up resize listener
+                const resizeHandler = () => {
+                    setTimeout(alignSnakeIcons, 50);
+                };
+                window.removeEventListener('resize', resizeHandler);
+                window.addEventListener('resize', resizeHandler);
             }
         })
         .catch(error => console.error('Error loading section:', error));
@@ -25,78 +28,90 @@ function loadSection(sectionName) {
 
 function alignSnakeIcons() {
     const container = document.querySelector('.snake-container');
-    if (!container) {
-        console.log('Container not found');
-        return;
-    }
+    if (!container) return;
     
     const svg = container.querySelector('.snake-svg');
-    const paths = container.querySelectorAll('.snake-path');
-    const icons = container.querySelectorAll('.snake-icon');
+    const paths = Array.from(container.querySelectorAll('.snake-path'));
+    const icons = Array.from(container.querySelectorAll('.snake-icon'));
     
-    if (!svg) {
-        console.log('SVG not found');
-        return;
-    }
-    if (paths.length === 0) {
-        console.log('No paths found');
-        return;
-    }
-    if (icons.length === 0) {
-        console.log('No icons found');
-        return;
-    }
+    if (!svg || paths.length === 0 || icons.length === 0) return;
     
-    // Get container and SVG dimensions
+    // Wait for layout to be ready
     const containerRect = container.getBoundingClientRect();
     const svgRect = svg.getBoundingClientRect();
-    const viewBox = svg.viewBox.baseVal;
     
-    // Icon radius in pixels
+    if (containerRect.width === 0 || containerRect.height === 0 || svgRect.width === 0 || svgRect.height === 0) {
+        setTimeout(alignSnakeIcons, 100);
+        return;
+    }
+    
+    // Calculate total length of all paths combined
+    const pathLengths = paths.map(p => p.getTotalLength());
+    const totalLength = pathLengths.reduce((sum, len) => sum + len, 0);
+    
+    if (totalLength === 0) return;
+    
+    // Calculate cumulative lengths to know which path segment each position falls on
+    const cumulativeLengths = [0];
+    pathLengths.forEach((len, i) => {
+        cumulativeLengths.push(cumulativeLengths[i] + len);
+    });
+    
+    // Icon radius
     const iconRadius = 25;
     const lineThickness = 4;
     
-    // Calculate scale factors (SVG might be scaled to fit container)
-    const scaleX = svgRect.width / viewBox.width;
-    const scaleY = svgRect.height / viewBox.height;
+    // Create SVG point for coordinate transformation
+    const svgPoint = svg.createSVGPoint();
+    const containerPoint = container.getBoundingClientRect();
     
+    // Distribute icons evenly along the entire snake path
     icons.forEach((icon, index) => {
-        const pathIndex = parseInt(icon.getAttribute('data-path'));
-        const position = parseFloat(icon.getAttribute('data-position'));
-        const path = paths[pathIndex];
+        // Calculate position along total path (0 to 1)
+        const position = icons.length > 1 ? index / (icons.length - 1) : 0;
+        const targetLength = position * totalLength;
         
-        if (!path) {
-            console.log('Path not found for icon', index, 'pathIndex', pathIndex);
-            return;
+        // Find which path segment this position falls on
+        let pathIndex = paths.length - 1;
+        for (let i = 0; i < cumulativeLengths.length - 1; i++) {
+            if (targetLength >= cumulativeLengths[i] && targetLength <= cumulativeLengths[i + 1]) {
+                pathIndex = i;
+                break;
+            }
         }
         
+        const path = paths[pathIndex];
+        if (!path) return;
+        
         try {
-            // Get total length of path
-            const pathLength = path.getTotalLength();
+            // Calculate position within this specific path segment
+            const segmentStartLength = cumulativeLengths[pathIndex];
+            const segmentLength = pathLengths[pathIndex];
+            const positionInSegment = segmentLength > 0 ? Math.max(0, Math.min(1, (targetLength - segmentStartLength) / segmentLength)) : 0;
             
-            // Get point at position along path (in SVG viewBox coordinates)
-            const point = path.getPointAtLength(pathLength * position);
+            // Get point on path in SVG viewBox coordinates
+            const point = path.getPointAtLength(segmentLength * positionInSegment);
             
-            // Convert SVG viewBox coordinates to percentage of container
-            // viewBox is 0 0 1200 600
-            const xPercent = (point.x / viewBox.width) * 100;
-            const yPercent = (point.y / viewBox.height) * 100;
+            // Use SVG's matrix transformation to convert to screen coordinates
+            svgPoint.x = point.x;
+            svgPoint.y = point.y;
+            const screenPoint = svgPoint.matrixTransform(svg.getScreenCTM());
             
-            // For the first icon, position it on top of the line
-            let yOffset = 0;
-            if (index === 0) {
-                // Calculate offset to position icon on top of line
-                // Move up by (icon radius + half line thickness) in percentage
-                const offsetPixels = iconRadius + (lineThickness / 2);
-                yOffset = -(offsetPixels / containerRect.height) * 100;
-            }
+            // Convert screen coordinates to container-relative coordinates
+            const containerLeft = containerPoint.left;
+            const containerTop = containerPoint.top;
+            const xPixels = screenPoint.x - containerLeft;
+            const yPixels = screenPoint.y - containerTop;
             
-            // Set position as percentage
+            // Convert to percentage of container
+            const xPercent = (xPixels / containerRect.width) * 100;
+            const yPercent = (yPixels / containerRect.height) * 100;
+            
+            // Set position - icons use transform: translate(-50%, -50%) so this centers them on the point
             icon.style.left = xPercent + '%';
-            icon.style.top = (yPercent + yOffset) + '%';
+            icon.style.top = yPercent + '%';
             icon.style.display = 'flex';
             icon.style.visibility = 'visible';
-            icon.style.opacity = '1';
             
         } catch (e) {
             console.error('Error positioning icon', index, e);
