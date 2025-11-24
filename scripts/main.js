@@ -46,8 +46,6 @@ function generateSnakePath() {
     
     // Calculate how many rows and curves we need
     // Pattern: row(3) -> curve(1) -> row(3) -> curve(1) -> ...
-    const itemsPerCycle = iconsPerRow + iconsPerCurve; // 4 items
-    
     let numRows = 0;
     let numCurves = 0;
     let remainingIcons = totalIcons;
@@ -69,19 +67,32 @@ function generateSnakePath() {
         }
     }
     
-    // SVG viewBox dimensions
-    const viewBoxWidth = 1200;
-    const viewBoxHeight = 600;
+    // Dynamic spacing configuration
+    const rowSpacing = 120; // Fixed spacing between rows (in viewBox units)
     const marginX = 100;
     const marginY = 50;
-    const totalRows = numRows;
-    const rowSpacing = totalRows > 1 ? (viewBoxHeight - 2 * marginY) / (totalRows - 1) : 0;
-    const rowWidth = viewBoxWidth - 2 * marginX;
+    const viewBoxWidth = 1200;
+    
+    // Calculate dynamic height based on number of rows
+    const viewBoxHeight = numRows > 1 ? marginY * 2 + (numRows - 1) * rowSpacing : marginY * 2 + 100;
+    
+    // Update SVG viewBox to accommodate all rows
+    svg.setAttribute('viewBox', `0 0 ${viewBoxWidth} ${viewBoxHeight}`);
+    
+    // Update container and SVG height dynamically
+    const containerRect = container.getBoundingClientRect();
+    const availableWidth = containerRect.width - 80; // Account for padding
+    const scaleFactor = availableWidth / viewBoxWidth;
+    const requiredHeight = viewBoxHeight * scaleFactor + 120; // Add padding (60px top + 60px bottom)
+    
+    container.style.minHeight = requiredHeight + 'px';
+    svg.style.height = (viewBoxHeight * scaleFactor) + 'px';
     
     // Generate paths
     const paths = [];
     let currentY = marginY;
     let isLeftToRight = true;
+    const rowWidth = viewBoxWidth - 2 * marginX;
     
     for (let i = 0; i < numRows; i++) {
         const startX = isLeftToRight ? marginX : marginX + rowWidth;
