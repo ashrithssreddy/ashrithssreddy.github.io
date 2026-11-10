@@ -21,20 +21,17 @@ function layoutLifeTimeline() {
         timeline.prepend(path);
     }
 
-    let detail = timeline.parentElement.querySelector(':scope > .life-timeline-detail');
-    if (!detail) {
-        detail = document.createElement('div');
-        detail.className = 'life-timeline-detail';
-        detail.setAttribute('aria-live', 'polite');
-        timeline.insertAdjacentElement('afterend', detail);
-    }
-
     items.forEach((item) => {
         if (!item.querySelector('.timeline-label')) {
             const label = document.createElement('div');
             label.className = 'timeline-label';
             label.textContent = item.dataset.label || '';
-            item.appendChild(label);
+            const content = item.querySelector('.content');
+            if (content) {
+                item.insertBefore(label, content);
+            } else {
+                item.appendChild(label);
+            }
         }
         item.setAttribute('role', 'button');
         item.tabIndex = 0;
@@ -42,33 +39,36 @@ function layoutLifeTimeline() {
             return;
         }
         item.dataset.bound = 'true';
-        item.addEventListener('click', () => selectLifeStop(items, detail, item));
-        item.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                selectLifeStop(items, detail, item);
-            }
-        });
+        const placeCard = () => {
+            requestAnimationFrame(() => placeLifeTimelineCard(item));
+        };
+        item.addEventListener('mouseenter', placeCard);
+        item.addEventListener('focus', placeCard);
     });
 
     positionLifeTimeline(timeline, items);
-    if (!timeline.querySelector('.timeline-item.is-selected')) {
-        selectLifeStop(items, detail, items[0]);
-    }
 }
 
-function selectLifeStop(items, detail, item) {
-    items.forEach((node) => {
-        const selected = node === item;
-        node.classList.toggle('is-selected', selected);
-        node.setAttribute('aria-pressed', selected ? 'true' : 'false');
-    });
-    const date = item.querySelector('.timeline-date');
-    const dateText = date ? date.textContent.trim() : '';
-    const label = item.dataset.label || '';
-    const content = item.querySelector('.content');
-    const heading = [dateText, label].filter(Boolean).join(' — ');
-    detail.innerHTML = '<h3>' + escapeTimelineText(heading) + '</h3>' + (content ? content.innerHTML : '');
+function placeLifeTimelineCard(item) {
+    const card = item.querySelector('.content');
+    if (!card) {
+        return;
+    }
+    card.style.left = '50%';
+    card.style.right = 'auto';
+    card.style.transform = 'translateX(-50%)';
+    const rect = card.getBoundingClientRect();
+    const margin = 8;
+    const viewWidth = document.documentElement.clientWidth;
+    if (rect.right > viewWidth - margin) {
+        card.style.left = 'auto';
+        card.style.right = '0';
+        card.style.transform = 'none';
+    } else if (rect.left < margin) {
+        card.style.left = '0';
+        card.style.right = 'auto';
+        card.style.transform = 'none';
+    }
 }
 
 function positionLifeTimeline(timeline, items) {
@@ -81,17 +81,17 @@ function positionLifeTimeline(timeline, items) {
         item.style.gridColumn = String(column);
         item.style.gridRow = String(row + 1);
     });
-    drawLifeTimelinePath(timeline, items);
+    drawLifeTimelinePath(timeline, items, columns);
 }
 
-function drawLifeTimelinePath(timeline, items) {
+function drawLifeTimelinePath(timeline, items, columns) {
     const path = timeline.querySelector('.life-timeline-path');
     const line = path ? path.querySelector('path') : null;
     if (!path || !line) {
         return;
     }
     const host = timeline.getBoundingClientRect();
-    const points = items.map((item) => {
+    const centers = items.map((item) => {
         const icon = item.querySelector('i') || item;
         const rect = icon.getBoundingClientRect();
         return {
@@ -99,24 +99,29 @@ function drawLifeTimelinePath(timeline, items) {
             y: rect.top + (rect.height / 2) - host.top
         };
     });
+    const elbow = 8;
+    const commands = [];
+    centers.forEach((point, index) => {
+        if (index === 0) {
+            commands.push('M ' + point.x.toFixed(1) + ' ' + point.y.toFixed(1));
+            return;
+        }
+        const previous = centers[index - 1];
+        const previousRow = Math.floor((index - 1) / columns);
+        const row = Math.floor(index / columns);
+        if (row === previousRow) {
+            commands.push('L ' + point.x.toFixed(1) + ' ' + point.y.toFixed(1));
+            return;
+        }
+        const outward = (previousRow % 2 === 0) ? host.width - elbow : elbow;
+        commands.push('L ' + outward.toFixed(1) + ' ' + previous.y.toFixed(1));
+        commands.push('L ' + outward.toFixed(1) + ' ' + point.y.toFixed(1));
+        commands.push('L ' + point.x.toFixed(1) + ' ' + point.y.toFixed(1));
+    });
     path.setAttribute('viewBox', '0 0 ' + host.width + ' ' + host.height);
     path.setAttribute('width', String(host.width));
     path.setAttribute('height', String(host.height));
-    line.setAttribute('d', points.map((point, index) => {
-        return (index === 0 ? 'M ' : 'L ') + point.x.toFixed(1) + ' ' + point.y.toFixed(1);
-    }).join(' '));
-}
-
-function escapeTimelineText(value) {
-    return value.replace(/[&<>"']/g, (character) => {
-        switch (character) {
-            case '&': return '&amp;';
-            case '<': return '&lt;';
-            case '>': return '&gt;';
-            case '"': return '&quot;';
-            default: return '&#39;';
-        }
-    });
+    line.setAttribute('d', commands.join(' '));
 }
 
 let lifeTimelineResize = null;
