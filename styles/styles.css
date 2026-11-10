@@ -409,6 +409,201 @@ a:hover {
     font-size: inherit;
 }
 
+/* Snake timeline shared by About Me and Skills. main.js places the stops. */
+.life-timeline {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 34px 16px;
+    max-width: 900px;
+    margin: 8px auto 0;
+    padding: 4px 26px 8px;
+    overflow: visible;
+    font-family: "Open Sans", sans-serif;
+}
+
+.life-timeline + .skills-container {
+    margin-top: 8px;
+}
+
+.life-timeline-path {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.life-timeline-path path {
+    fill: none;
+    stroke: #466273;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.life-timeline .timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+    width: auto;
+    margin: 0;
+    padding: 0 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.life-timeline .timeline-item:hover,
+.life-timeline .timeline-item:focus,
+.life-timeline .timeline-item:focus-within {
+    z-index: 4;
+}
+
+.life-timeline .timeline-item .content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    width: min(360px, 78vw);
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    background: #ffffff;
+    padding: 14px 16px 12px;
+    border-radius: 14px;
+    border: 1px solid #d5e2ea;
+    border-top: 3px solid #466273;
+    box-shadow: 0 14px 32px rgba(36, 56, 70, 0.16);
+    text-align: left;
+    z-index: 5;
+    font-family: "Open Sans", sans-serif;
+    color: #2c3a42;
+}
+
+.life-timeline .timeline-item .content.is-above {
+    top: auto;
+    bottom: calc(100% + 12px);
+}
+
+.life-timeline .timeline-item .content::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    background: #ffffff;
+    border-left: 1px solid #d5e2ea;
+    border-top: 1px solid #d5e2ea;
+    transform: rotate(45deg);
+}
+
+.life-timeline .timeline-item .content.is-above::before {
+    top: auto;
+    bottom: -6px;
+    border-top: none;
+    border-left: none;
+    border-right: 1px solid #d5e2ea;
+    border-bottom: 1px solid #d5e2ea;
+}
+
+.life-timeline .timeline-item:hover .content,
+.life-timeline .timeline-item:focus .content,
+.life-timeline .timeline-item:focus-within .content {
+    display: block;
+}
+
+.life-timeline .timeline-card-kicker {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #466273;
+    line-height: 1.2;
+}
+
+.life-timeline .timeline-card-title {
+    margin: 2px 0 8px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1e313c;
+}
+
+.life-timeline .timeline-item .content p {
+    margin: 0 0 0.55em;
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.55;
+    color: #334047;
+}
+
+.life-timeline .timeline-item .content p:last-child {
+    margin-bottom: 0;
+}
+
+.life-timeline .timeline-item i {
+    position: relative;
+    left: auto;
+    top: auto;
+    order: 3;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 3px solid #f3f8fb;
+    background: #466273;
+    color: #ffffff;
+    font-size: 15px;
+    box-shadow: 0 0 0 2px #466273;
+    z-index: 2;
+}
+
+.life-timeline .timeline-date,
+.life-timeline .timeline-label {
+    position: static;
+    transform: none;
+    left: auto;
+    right: auto;
+    max-width: 100%;
+}
+
+.life-timeline .timeline-date {
+    order: 1;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    color: #1e313c;
+}
+
+.life-timeline .timeline-label {
+    order: 2;
+    margin: 3px 0 10px;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #466273;
+}
+
+@media (max-width: 720px) {
+    .life-timeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 /* Contact card container */
 .contact-card-box {
     display: flex;

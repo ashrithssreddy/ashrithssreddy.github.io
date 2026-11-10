@@ -92,8 +92,19 @@ function placeLifeTimelineCard(item) {
     }
 }
 
+function timelineColumnCount(timeline, count) {
+    const width = timeline.clientWidth;
+    if (width < 560) {
+        return 2;
+    }
+    if (count <= 6 && width >= 760) {
+        return count;
+    }
+    return 4;
+}
+
 function positionLifeTimeline(timeline, items) {
-    const columns = timeline.clientWidth < 720 ? 2 : 4;
+    const columns = timelineColumnCount(timeline, items.length);
     timeline.style.gridTemplateColumns = 'repeat(' + columns + ', minmax(0, 1fr))';
     items.forEach((item, index) => {
         const row = Math.floor(index / columns);
@@ -158,11 +169,12 @@ function loadSection(sectionName) {
             document.getElementById('content-container').innerHTML = data;
             updateActiveTab(sectionName);
             attachCollapsibleEventListeners(sectionName); // Pass the section name
-            if (sectionName === 'about_me') {
-                layoutLifeTimeline();
-                if (lifeTimelineResize) {
-                    window.removeEventListener('resize', lifeTimelineResize);
-                }
+            layoutLifeTimeline();
+            if (lifeTimelineResize) {
+                window.removeEventListener('resize', lifeTimelineResize);
+                lifeTimelineResize = null;
+            }
+            if (document.querySelector('#content-container .life-timeline')) {
                 lifeTimelineResize = () => {
                     const timeline = document.querySelector('#content-container .life-timeline');
                     if (!timeline) {
