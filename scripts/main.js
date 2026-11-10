@@ -22,16 +22,29 @@ function layoutLifeTimeline() {
     }
 
     items.forEach((item) => {
+        const content = item.querySelector('.content');
         if (!item.querySelector('.timeline-label')) {
             const label = document.createElement('div');
             label.className = 'timeline-label';
             label.textContent = item.dataset.label || '';
-            const content = item.querySelector('.content');
             if (content) {
                 item.insertBefore(label, content);
             } else {
                 item.appendChild(label);
             }
+        }
+        if (content && !content.querySelector('.timeline-card-head')) {
+            const date = item.querySelector('.timeline-date');
+            const head = document.createElement('div');
+            head.className = 'timeline-card-head';
+            const kicker = document.createElement('div');
+            kicker.className = 'timeline-card-kicker';
+            kicker.textContent = date ? date.textContent.trim() : '';
+            const title = document.createElement('div');
+            title.className = 'timeline-card-title';
+            title.textContent = item.dataset.label || '';
+            head.append(kicker, title);
+            content.prepend(head);
         }
         item.setAttribute('role', 'button');
         item.tabIndex = 0;
@@ -53,6 +66,14 @@ function placeLifeTimelineCard(item) {
     const card = item.querySelector('.content');
     if (!card) {
         return;
+    }
+    const itemRect = item.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - itemRect.bottom;
+    const spaceAbove = itemRect.top;
+    if (spaceBelow < 230 && spaceAbove > spaceBelow) {
+        card.classList.add('is-above');
+    } else {
+        card.classList.remove('is-above');
     }
     card.style.left = '50%';
     card.style.right = 'auto';
